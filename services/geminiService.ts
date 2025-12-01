@@ -1,6 +1,6 @@
 import { HealthResponse, UserProfile } from '../types';
 
-const API_KEY = "AIzaSyDmHZcA85IGZNYYY6xrjD3-YYm_nZ26LHw";
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 const generatePrompt = (symptom: string, profile?: UserProfile | null) => `
 You are Zendee Health. Compare "Standard Medical" and "Natural Wellness" perspectives.
