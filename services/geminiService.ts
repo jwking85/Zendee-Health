@@ -1,14 +1,17 @@
-import { GoogleGenAI } from "@google/genai";
 import { HealthResponse, UserProfile } from '../types';
 
-const generateSystemInstruction = (profile?: UserProfile | null) => `
+const API_KEY = "AIzaSyDmHZcA85IGZNYYY6xrjD3-YYm_nZ26LHw";
+
+const generatePrompt = (symptom: string, profile?: UserProfile | null) => `
 You are Zendee Health. Compare "Standard Medical" and "Natural Wellness" perspectives.
+
+Analyze this symptom: "${symptom}"
 
 TONE RULES:
 - Write like a smart friend. Direct. Clear.
 - Short sentences.
 - No "journey", "empower", "comprehensive", "utilize", "leverage".
-- No em-dashes (—). Use periods or commas.
+- No em-dashes. Use periods or commas.
 - No "Furthermore" or "Moreover".
 - Max one exclamation point.
 
@@ -18,7 +21,8 @@ Conditions: ${profile.conditions.join(', ') || 'None'}
 Diet: ${profile.diet}
 Adjust protocols for this profile. Flag contraindications.` : ''}
 
-OUTPUT FORMAT: Return ONLY valid JSON.
+Return ONLY valid JSON (no markdown, no code blocks):
+
 {
   "medical": {
     "diagnosis": "What a doctor would typically investigate",
@@ -43,31 +47,46 @@ OUTPUT FORMAT: Return ONLY valid JSON.
     ]
   }
 }
+
+Include 4-6 protocols covering metabolic, gut, nutritional, and lifestyle approaches.
 `;
 
 export const fetchHealthAdvice = async (symptom: string, profile?: UserProfile | null): Promise<HealthResponse> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: `Analyze symptom: "${symptom}"`,
-      config: {
-        systemInstruction: generateSystemInstruction(profile),
-        responseMimeType: "application/json"
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: generatePrompt(symptom, profile) }] }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 4096
+          }
+        })
       }
-    });
+    );
 
-    const text = response.text;
-    
-    if (!text) {
-      throw new Error("Unable to analyze this query.");
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error("API Response:", errorData);
+      throw new Error(`API error: ${response.status}`);
     }
 
-    const jsonString = text.replace(/```json/g, '').replace(/```/g, '').trim();
+    const data = await response.json();
     
-    return JSON.parse(jsonString) as HealthResponse;
-
+    if (!data.candidates || !data.candidates[0]?.content?.parts?.[0]?.text) {
+      throw new Error("Invalid response from API");
+    }
+    
+    let text = data.candidates[0].content.parts[0].text;
+    
+    // Clean up response if it has markdown code blocks
+    text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    
+    return JSON.parse(text) as HealthResponse;
+    
   } catch (error) {
     console.error("Gemini API Error:", error);
     throw new Error("We couldn't complete the analysis. Please try again.");
