@@ -7,30 +7,29 @@ export interface UserProfile {
 
 export interface MedicalPath {
   diagnosis: string;
-  treatments: string[];
-  timeline: string;
-  considerations: string[];
+  rationale: string;
+  redFlags: string[];
+  whatToAskDoctor: string[];
 }
 
 export interface HolisticProtocol {
   focusArea: string;
   title: string;
   approach: string;
-  details: string; // Pro specific details
-  reasoning: string;
-  shoppingList: string[]; // Pro specific products
+  details?: string;
+  reasoning?: string;
+  shoppingList?: string[];
 }
 
 export interface HolisticPath {
-  philosophy: string;
-  rootCause: string;
-  timeline: string;
-  researchNote: string;
   protocols: HolisticProtocol[];
+  lifestyle: string[];
+  supplements: string[];
+  cautions: string[];
 }
 
 export interface HealthResponse {
-  medical: MedicalPath;
+  standard: MedicalPath;
   holistic: HolisticPath;
 }
 

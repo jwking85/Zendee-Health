@@ -140,7 +140,11 @@ const App: React.FC = () => {
       )}
       {showWaitlist && <WaitlistModal onClose={() => setShowWaitlist(false)} />}
       {showShare && data && (
-        <ShareCard onClose={() => setShowShare(false)} symptom={query || "Health Query"} rootCause={data.holistic.rootCause} />
+        <ShareCard
+          onClose={() => setShowShare(false)}
+          symptom={query || "Health Query"}
+          rootCause={data.holistic.protocols?.[0]?.approach || "Natural wellness approach"}
+        />
       )}
       {showProfilePrompt && (
         <ProfilePrompt onSave={handleProfileSave} onSkip={handleProfileSkip} />

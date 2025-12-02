@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
-import { Leaf, Sparkles, Sprout, Target, Clock, Calculator, ArrowRight, BookOpen } from 'lucide-react';
-import { HolisticPath } from '../types';
-import { ProtocolItem } from './ProtocolItem';
-import { StreamingText } from './StreamingText';
-import { ShoppingList } from './ShoppingList';
-import { DailyChecklist } from './DailyChecklist';
+import React from 'react';
+import { Leaf, Sparkles, Sprout, Target, Pill, AlertTriangle, ShoppingCart } from 'lucide-react';
+import type { HealthResponse } from '../types';
 
 interface HolisticCardProps {
-  data: HolisticPath;
+  data?: HealthResponse["holistic"];
   isPro: boolean;
   onUnlockAttempt: () => void;
 }
 
-export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro, onUnlockAttempt }) => {
-  const [weight, setWeight] = useState('');
-  
-  // Extract all products for the shopping list
-  const allProducts = data.protocols.flatMap(p => p.shoppingList || []);
+export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro }) => {
+  if (!data) return null;
+
+  const { protocols, lifestyle, supplements, cautions } = data;
 
   return (
     <div className={`
@@ -51,113 +46,118 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro, onUnloc
       </div>
 
       <div className="p-6 sm:p-8 space-y-8 flex-grow">
-        {/* Philosophy - Streaming Text */}
-        <div className="relative group/quote">
-          <div className={`absolute -left-3 -top-3 text-6xl font-serif leading-none select-none transition-colors duration-500 opacity-20 ${isPro ? 'text-amber-300' : 'text-teal-300'}`}>"</div>
-          <h4 className={`relative z-10 text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
-            <Sprout className="w-4 h-4" />
-            Perspective
-          </h4>
-          <p className="relative z-10 text-gray-800 leading-relaxed text-lg font-medium italic min-h-[60px]">
-            <StreamingText text={data.philosophy} speed={25} />
-          </p>
-        </div>
-
-        {/* Root Cause Analysis */}
-        <div className={`rounded-2xl p-6 transition-colors duration-500 ${isPro ? 'bg-amber-50/50 border border-amber-100' : 'bg-teal-50/50 border border-teal-100'}`}>
-          <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
-            <Target className="w-4 h-4" />
-            Root Cause
-          </h4>
-          <p className="text-gray-900 leading-relaxed font-medium">
-            {data.rootCause}
-          </p>
-          {data.researchNote && (
-            <div className="mt-4 pt-4 border-t border-black/5 flex items-start gap-2 text-xs text-gray-500 font-medium">
-               <BookOpen className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
-               {data.researchNote}
-            </div>
-          )}
-        </div>
-
-        {/* Timeline */}
-        <div>
-          <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
-            <Clock className="w-4 h-4" />
-            Timeline
-          </h4>
-          <p className={`text-sm leading-relaxed p-4 rounded-xl border font-medium ${isPro ? 'text-gray-700 bg-amber-50/30 border-amber-100' : 'text-gray-600 bg-teal-50/30 border-teal-100'}`}>
-            {data.timeline}
-          </p>
-        </div>
-
-        {/* Protocols List */}
-        <div>
-           <h4 className={`text-xs font-bold uppercase tracking-wider mb-6 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
-             Protocols
-           </h4>
-           
-           <div className="space-y-8">
-             {data.protocols.map((protocol, idx) => (
-               <ProtocolItem 
-                 key={idx} 
-                 protocol={protocol} 
-                 index={idx} 
-                 isPro={isPro} 
-                 onUnlock={onUnlockAttempt}
-               />
-             ))}
-           </div>
-        </div>
-
-        {/* PRO UTILITIES SECTION */}
-        <div className={`mt-10 border-t-2 border-dashed pt-8 ${isPro ? 'border-amber-200' : 'border-gray-200'}`}>
-          <div className="flex items-center gap-2 mb-6">
-            <Sparkles className={`w-5 h-5 ${isPro ? 'text-amber-500 fill-amber-500' : 'text-gray-300'}`} />
-            <h4 className={`font-bold uppercase tracking-wider ${isPro ? 'text-amber-900' : 'text-gray-400'}`}>Pro Tools</h4>
-            {!isPro && <span className="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-0.5 rounded-full ml-2">LOCKED</span>}
-          </div>
-
-          <div className={`grid gap-4 ${!isPro ? 'opacity-40 pointer-events-none grayscale-[0.8]' : ''}`}>
-            
-            <ShoppingList products={allProducts} />
-
-            {/* Dosage Calculator */}
-            <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
-               <h5 className="font-bold text-gray-800 flex items-center gap-2 mb-3">
-                  <Calculator className="w-5 h-5 text-teal-600" /> Calculator
-                </h5>
-                <div className="flex gap-2">
-                  <input 
-                    type="number" 
-                    placeholder="Weight (lbs)" 
-                    className="w-28 px-4 py-2 border border-gray-200 rounded-xl text-sm outline-none focus:border-teal-500 transition-colors"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                  />
-                  <div className="flex-grow flex items-center px-4 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm text-gray-600">
-                    {weight ? (
-                      <span className="text-teal-700 font-bold">Suggested: {Math.round(parseInt(weight) * 3.5)}mg daily</span>
-                    ) : (
-                      <span className="text-gray-400 italic">Enter weight...</span>
-                    )}
+        {/* Protocols */}
+        {protocols?.length > 0 && (
+          <div className="mb-6">
+            <h3 className={`text-xs font-bold uppercase tracking-wider mb-4 flex items-center gap-2 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
+              <Target className="w-4 h-4" />
+              Holistic Protocols
+            </h3>
+            <ul className="space-y-4">
+              {protocols.map((protocol, idx) => (
+                <li
+                  key={idx}
+                  className={`rounded-xl border p-4 transition-colors duration-500 ${isPro ? 'border-amber-100 bg-amber-50/70' : 'border-teal-100 bg-teal-50/70'}`}
+                >
+                  <div className={`text-[11px] font-semibold uppercase tracking-wide mb-1 ${isPro ? 'text-amber-700' : 'text-teal-700'}`}>
+                    {protocol.focusArea}
                   </div>
-                </div>
-            </div>
+                  <div className="text-sm font-semibold text-slate-900 mb-2">
+                    {protocol.title}
+                  </div>
+                  <p className="text-sm text-slate-700 mb-2">
+                    {protocol.approach}
+                  </p>
 
-            <DailyChecklist protocols={data.protocols} />
-            
+                  {protocol.details && (
+                    <p className="text-xs text-slate-600 mb-2">
+                      {protocol.details}
+                    </p>
+                  )}
+
+                  {protocol.reasoning && (
+                    <p className="text-xs text-slate-600 mb-2">
+                      <span className="font-semibold">Why this might help: </span>
+                      {protocol.reasoning}
+                    </p>
+                  )}
+
+                  {protocol.shoppingList && protocol.shoppingList.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-slate-200">
+                      <p className={`text-[11px] font-semibold mb-2 flex items-center gap-1 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
+                        <ShoppingCart className="w-3 h-3" />
+                        Shopping List
+                      </p>
+                      <ul className="list-disc list-inside text-[11px] text-slate-700 space-y-1">
+                        {protocol.shoppingList.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
-          
-          {!isPro && (
-            <div className="mt-6 text-center">
-               <button onClick={onUnlockAttempt} className="text-sm font-bold text-amber-600 hover:text-amber-700 flex items-center justify-center gap-1 mx-auto transition-all hover:gap-2 px-6 py-3 bg-amber-50 rounded-full border border-amber-100 hover:bg-amber-100">
-                 Unlock Pro Tools <ArrowRight className="w-4 h-4" />
-               </button>
-            </div>
-          )}
+        )}
 
-        </div>
+        {/* Lifestyle */}
+        {lifestyle && lifestyle.length > 0 && (
+          <div>
+            <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
+              <Sprout className="w-4 h-4" />
+              Lifestyle Changes
+            </h4>
+            <ul className="space-y-3">
+              {lifestyle.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-gray-700 text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 flex-shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Supplements */}
+        {supplements && supplements.length > 0 && (
+          <div className="bg-slate-50/80 rounded-2xl p-6 border border-slate-100">
+            <h4 className="flex items-center gap-2 text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">
+              <Pill className="w-4 h-4 text-slate-500" />
+              Supplements to Consider
+            </h4>
+            <ul className="space-y-3">
+              {supplements.map((supplement, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-gray-700 text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 flex-shrink-0" />
+                  <span>{supplement}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Cautions */}
+        {cautions && cautions.length > 0 && (
+          <div>
+            <h4 className="flex items-center gap-2 text-xs font-bold text-amber-700 uppercase tracking-wider mb-3">
+              <AlertTriangle className="w-4 h-4" />
+              Important Notes
+            </h4>
+            <ul className="space-y-3">
+              {cautions.map((caution, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
+                  <span className="text-amber-800 font-medium">{caution}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">
+          *Natural approaches work best alongside professional medical care
+        </p>
       </div>
     </div>
   );
