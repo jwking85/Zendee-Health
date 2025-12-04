@@ -153,95 +153,108 @@ const App: React.FC = () => {
       <main className="flex-grow w-full">
 
         {/* Hero Section */}
-        <section className="bg-slate-50">
-          <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-10 sm:px-6 sm:py-14">
-            {/* Top Block - Heading + Subtext */}
-            <div className="text-center sm:text-left">
-              <h1 className="text-4xl font-extrabold tracking-tight text-brand-dark sm:text-5xl">
-                Real answers.<br />
-                <span className="text-brand-teal font-serif italic">Real relief.</span>
-              </h1>
+        <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/30">
+          <div className="mx-auto max-w-6xl px-4 py-6 md:py-10">
+            <div className="mx-auto max-w-3xl">
+              {/* Headline */}
+              <div className="mb-6 text-center md:mb-8">
+                <h1 className="text-[32px] font-extrabold leading-[1.15] tracking-tight text-brand-dark md:text-[52px] md:leading-[1.1]">
+                  Real answers.<br />
+                  <span className="text-brand-teal font-serif italic">Real relief.</span>
+                </h1>
+                <p className="mt-4 text-[16px] leading-relaxed text-slate-600 md:text-[18px]">
+                  Compare standard medicine with root-cause care—side by side.
+                </p>
+              </div>
 
-              <p className="mt-3 text-base text-slate-700 sm:text-lg">
-                Tell us a symptom or diagnosis and we'll show you how standard medicine and root-cause care stack up—side by side.
-              </p>
-            </div>
+              {/* Search Card - Centered */}
+              <div className="relative">
+                <div className="mx-auto w-full max-w-xl rounded-2xl bg-white p-5 shadow-2xl shadow-emerald-500/20 ring-2 ring-emerald-100 md:p-7">
+                  <form onSubmit={handleSearch}>
+                    <div className="space-y-3">
+                      <label className="block text-sm font-semibold text-slate-700">
+                        What are you experiencing?
+                      </label>
 
-            {/* Card Block - Main Tool */}
-            <div className="mx-auto w-full max-w-xl">
-              <div className="rounded-3xl bg-white p-5 shadow-lg shadow-teal-100/60 ring-1 ring-slate-100 sm:p-6">
-                <label className="block text-sm font-medium text-slate-600">
-                  Describe a symptom or diagnosis
-                </label>
+                      <input
+                        type="text"
+                        className="block w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder-slate-400 shadow-sm transition focus:border-emerald-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-400/10 md:py-4 md:text-[17px]"
+                        placeholder="e.g., constant heartburn, fatty liver, chronic headaches"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        disabled={isLoading}
+                      />
 
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    className="block w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base placeholder-gray-400 shadow-inner focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20 sm:py-3.5 sm:text-lg"
-                    placeholder="e.g., constant heartburn, fatty liver, chronic headaches"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    disabled={isLoading}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && !isLoading && query.trim()) {
-                        handleSearch();
-                      }
-                    }}
-                  />
-                </div>
+                      <button
+                        type="submit"
+                        disabled={isLoading || !query.trim()}
+                        className="flex h-[48px] w-full items-center justify-center rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-6 text-base font-bold text-white shadow-lg shadow-emerald-500/30 transition hover:from-emerald-600 hover:to-teal-600 hover:shadow-xl hover:shadow-emerald-500/40 focus:outline-none focus:ring-4 focus:ring-emerald-400/50 disabled:opacity-50 disabled:cursor-not-allowed md:h-[52px] md:text-lg"
+                      >
+                        {isLoading ? 'Analyzing...' : 'Find Relief'}
+                      </button>
+                    </div>
+                  </form>
 
-                <button
-                  type="button"
-                  onClick={handleSearch}
-                  disabled={isLoading || !query.trim()}
-                  className="mt-3 flex w-full items-center justify-center rounded-xl bg-brand-teal px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-brand-teal/90 focus:outline-none focus:ring-2 focus:ring-brand-teal/30 disabled:opacity-50 sm:py-3.5 sm:text-lg"
-                >
-                  {isLoading ? 'Analyzing...' : 'Find Relief'}
-                </button>
-
-                <div className="mt-4">
-                  <p className="text-xs font-semibold tracking-wide text-slate-500">
-                    QUICK SUGGESTIONS:
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {history.length > 0 ? (
-                      <>
-                        {history.map((q, idx) => (
-                          <button
-                            type="button"
-                            key={`hist-${idx}`}
-                            onClick={() => handleQuickSelect(q)}
-                            className="cursor-pointer rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200 sm:text-sm"
-                          >
-                            {q}
-                          </button>
-                        ))}
-                      </>
-                    ) : (
-                      <>
-                        {SAMPLE_QUERIES.slice(0, 6).map((q) => (
-                          <button
-                            type="button"
-                            key={q}
-                            onClick={() => handleQuickSelect(q)}
-                            className="cursor-pointer rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200 sm:text-sm"
-                          >
-                            {q}
-                          </button>
-                        ))}
-                      </>
-                    )}
+                  {/* Quick Suggestions */}
+                  <div className="mt-5 pt-4 border-t border-slate-100">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Popular Searches:
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {history.length > 0 ? (
+                        <>
+                          {history.map((q, idx) => (
+                            <button
+                              type="button"
+                              key={`hist-${idx}`}
+                              onClick={() => handleQuickSelect(q)}
+                              className="inline-flex items-center rounded-full bg-emerald-50 px-3.5 py-2 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200 transition hover:bg-emerald-100 hover:ring-emerald-300 md:text-sm"
+                            >
+                              {q}
+                            </button>
+                          ))}
+                        </>
+                      ) : (
+                        <>
+                          {SAMPLE_QUERIES.slice(0, 6).map((q) => (
+                            <button
+                              type="button"
+                              key={q}
+                              onClick={() => handleQuickSelect(q)}
+                              className="inline-flex items-center rounded-full bg-slate-100 px-3.5 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:bg-slate-200 hover:ring-slate-300 md:text-sm"
+                            >
+                              {q}
+                            </button>
+                          ))}
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Testimonial Ticker */}
-            {!data && !isLoading && (
-              <div className="mx-auto w-full max-w-xl">
-                <TestimonialTicker />
-              </div>
-            )}
+              {/* Testimonial Ticker */}
+              {!data && !isLoading && (
+                <div className="mt-8">
+                  <TestimonialTicker />
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-10 bg-white">
+          <div className="mx-auto max-w-2xl px-4 text-center">
+            <h2 className="text-lg font-semibold text-slate-800 mb-2">
+              How this tool works
+            </h2>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              This tool compares standard medical guidance with natural wellness insights
+              so you can understand both perspectives more clearly.
+            </p>
+            <p className="mt-2 text-[12px] text-slate-400 italic">
+              For educational use only.
+            </p>
           </div>
         </section>
 

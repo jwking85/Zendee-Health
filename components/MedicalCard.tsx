@@ -8,9 +8,9 @@ interface MedicalCardProps {
 
 export const MedicalCard: React.FC<MedicalCardProps> = ({ data }) => {
   return (
-    <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-gray-100 h-full flex flex-col hover:shadow-2xl transition-shadow duration-300">
+    <div className="group relative h-full flex flex-col overflow-hidden rounded-[1.75rem] border-2 border-slate-200 bg-slate-50 shadow-2xl shadow-slate-200/60 transition-all duration-300 hover:shadow-3xl hover:shadow-slate-300/70 hover:-translate-y-1">
       {/* Clinical Header */}
-      <div className="bg-slate-50 p-6 sm:p-8 border-b border-slate-100 flex items-center justify-between">
+      <div className="flex items-center justify-between border-b-2 border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-5 md:p-6">
         <div className="flex items-center gap-4">
           <div className="bg-white p-3 rounded-2xl shadow-sm border border-slate-200">
             <Stethoscope className="w-6 h-6 text-clarity-slate" />
@@ -22,14 +22,14 @@ export const MedicalCard: React.FC<MedicalCardProps> = ({ data }) => {
         </div>
       </div>
 
-      <div className="p-6 sm:p-8 space-y-8 flex-grow">
+      <div className="flex-grow space-y-6 bg-white p-5 md:p-6">
         {/* Diagnosis */}
         <div>
           <h4 className="flex items-center gap-2 text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">
             <Activity className="w-4 h-4 text-slate-500" />
             Typical Diagnosis
           </h4>
-          <p className="text-gray-700 leading-relaxed text-lg font-medium">
+          <p className="text-gray-700 leading-relaxed text-[15px] font-medium md:text-base">
             {data.diagnosis}
           </p>
         </div>

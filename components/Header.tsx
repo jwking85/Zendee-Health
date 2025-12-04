@@ -9,21 +9,24 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ isPro, onToggle }) => {
   return (
-    <header className="w-full border-b border-slate-100 bg-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
-        <div className="cursor-pointer transition-all duration-200 hover:scale-105" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <img
-              src={RemedyClearLogo}
-              alt="Remedy Clear"
-              className="h-8 w-auto object-contain sm:h-10"
-            />
-            <span className="text-lg font-semibold tracking-tight sm:text-xl">
-              REMEDY <span className="text-brand-teal">CLEAR</span>
-            </span>
-          </div>
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:py-4">
+        {/* LEFT: Only the Remedy Clear logo */}
+        <div
+          className="cursor-pointer transition-transform duration-200 hover:scale-105"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <img
+            src={RemedyClearLogo}
+            alt="Remedy Clear"
+            className="h-16 w-auto md:h-20 lg:h-24 object-contain drop-shadow-sm"
+          />
         </div>
-        <Toggle isPro={isPro} onToggle={onToggle} />
+
+        {/* RIGHT: Standard / Pro toggle */}
+        <div className="flex items-center">
+          <Toggle isPro={isPro} onToggle={onToggle} />
+        </div>
       </div>
     </header>
   );

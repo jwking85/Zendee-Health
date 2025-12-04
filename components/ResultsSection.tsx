@@ -12,9 +12,14 @@ interface ResultsSectionProps {
 
 export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, isPro, onUnlockAttempt, resultsRef }) => {
   return (
-    <div ref={resultsRef} className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 mb-20 items-stretch animate-slide-up">
-      <MedicalCard data={data.standard} />
-      <HolisticCard data={data.holistic} isPro={isPro} onUnlockAttempt={onUnlockAttempt} />
+    <div ref={resultsRef} className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12">
+      <h2 className="mb-6 text-center text-2xl font-bold text-slate-800 md:mb-8 md:text-3xl">
+        Your Comparison Results
+      </h2>
+      <div className="grid grid-cols-1 gap-6 animate-slide-up lg:grid-cols-2 lg:gap-8 items-start">
+        <MedicalCard data={data.standard} />
+        <HolisticCard data={data.holistic} isPro={isPro} onUnlockAttempt={onUnlockAttempt} />
+      </div>
     </div>
   );
 };
