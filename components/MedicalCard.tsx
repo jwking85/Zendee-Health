@@ -13,10 +13,10 @@ export const MedicalCard: React.FC<MedicalCardProps> = ({ data }) => {
       <div className="bg-slate-50 p-6 sm:p-8 border-b border-slate-100 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="bg-white p-3 rounded-2xl shadow-sm border border-slate-200">
-            <Stethoscope className="w-6 h-6 text-slate-600" />
+            <Stethoscope className="w-6 h-6 text-clarity-slate" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900 tracking-tight">Standard Medical</h3>
+            <h3 className="text-xl font-bold font-heading text-clarity-slate tracking-tight">Standard Medical</h3>
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Conventional Approach</span>
           </div>
         </div>

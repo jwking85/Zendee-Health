@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
           <span className="cursor-pointer hover:text-gray-600">Terms of Use</span>
         </div>
         <div className="mt-8 text-xs text-gray-300">
-          © 2025 Zendee Health
+          © 2025 Remedy Clear
         </div>
       </div>
     </footer>

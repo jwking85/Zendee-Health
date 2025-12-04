@@ -21,25 +21,25 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro }) => {
       {/* Premium Gradient Header */}
       <div className={`
         p-6 sm:p-8 border-b flex items-center justify-between gap-3 transition-all duration-500
-        ${isPro ? 'bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 border-amber-100' : 'bg-gradient-to-r from-teal-50 to-emerald-50 border-teal-100'}
+        ${isPro ? 'bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 border-golden/30' : 'bg-gradient-to-r from-teal-50 to-emerald-50 border-herbal/30'}
       `}>
         <div className="flex items-center gap-4">
           <div className={`
             p-3 rounded-2xl shadow-sm transition-colors duration-500
-            ${isPro ? 'bg-white text-amber-600 ring-1 ring-amber-100' : 'bg-white text-teal-600 ring-1 ring-teal-100'}
+            ${isPro ? 'bg-white text-golden ring-1 ring-golden/20' : 'bg-white text-herbal ring-1 ring-herbal/20'}
           `}>
             <Leaf className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900 tracking-tight">Natural Wellness</h3>
-            <span className={`text-xs font-bold uppercase tracking-wider transition-colors duration-500 ${isPro ? 'text-amber-700' : 'text-teal-700'}`}>
+            <h3 className="text-xl font-bold font-heading text-clarity-slate tracking-tight">Natural Wellness</h3>
+            <span className={`text-xs font-bold uppercase tracking-wider transition-colors duration-500 ${isPro ? 'text-golden' : 'text-herbal'}`}>
               Root Cause Approach
             </span>
           </div>
         </div>
         {isPro && (
-          <span className="bg-white/90 backdrop-blur border border-amber-200 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm animate-fade-in hidden sm:flex">
-            <Sparkles className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
+          <span className="bg-white/90 backdrop-blur border border-golden/30 text-golden text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm animate-fade-in hidden sm:flex">
+            <Sparkles className="w-3.5 h-3.5 fill-golden/60 text-golden" />
             PRO ACTIVE
           </span>
         )}
@@ -49,7 +49,7 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro }) => {
         {/* Protocols */}
         {protocols?.length > 0 && (
           <div className="mb-6">
-            <h3 className={`text-xs font-bold uppercase tracking-wider mb-4 flex items-center gap-2 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
+            <h3 className={`text-xs font-bold uppercase tracking-wider mb-4 flex items-center gap-2 ${isPro ? 'text-golden' : 'text-herbal'}`}>
               <Target className="w-4 h-4" />
               Holistic Protocols
             </h3>
@@ -57,12 +57,12 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro }) => {
               {protocols.map((protocol, idx) => (
                 <li
                   key={idx}
-                  className={`rounded-xl border p-4 transition-colors duration-500 ${isPro ? 'border-amber-100 bg-amber-50/70' : 'border-teal-100 bg-teal-50/70'}`}
+                  className={`rounded-xl border p-4 transition-colors duration-500 ${isPro ? 'border-golden/30 bg-amber-50/70' : 'border-herbal/30 bg-teal-50/70'}`}
                 >
-                  <div className={`text-[11px] font-semibold uppercase tracking-wide mb-1 ${isPro ? 'text-amber-700' : 'text-teal-700'}`}>
+                  <div className={`text-[11px] font-semibold uppercase tracking-wide mb-1 ${isPro ? 'text-golden' : 'text-herbal'}`}>
                     {protocol.focusArea}
                   </div>
-                  <div className="text-sm font-semibold text-slate-900 mb-2">
+                  <div className="text-sm font-semibold text-clarity-slate mb-2">
                     {protocol.title}
                   </div>
                   <p className="text-sm text-slate-700 mb-2">
@@ -84,7 +84,7 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro }) => {
 
                   {protocol.shoppingList && protocol.shoppingList.length > 0 && (
                     <div className="mt-3 pt-3 border-t border-slate-200">
-                      <p className={`text-[11px] font-semibold mb-2 flex items-center gap-1 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
+                      <p className={`text-[11px] font-semibold mb-2 flex items-center gap-1 ${isPro ? 'text-golden' : 'text-herbal'}`}>
                         <ShoppingCart className="w-3 h-3" />
                         Shopping List
                       </p>
@@ -104,7 +104,7 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro }) => {
         {/* Lifestyle */}
         {lifestyle && lifestyle.length > 0 && (
           <div>
-            <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2 ${isPro ? 'text-amber-800' : 'text-teal-800'}`}>
+            <h4 className={`text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2 ${isPro ? 'text-golden' : 'text-herbal'}`}>
               <Sprout className="w-4 h-4" />
               Lifestyle Changes
             </h4>

@@ -31,4 +31,4 @@ export const SAMPLE_QUERIES = [
   "Eczema flare up"
 ];
 
-export const DISCLAIMER_TEXT = "Zendee Health is an educational tool using public research. We aren't connected to specific doctors or institutions. This isn't medical advice. Always check with a qualified healthcare provider before making health decisions.";
+export const DISCLAIMER_TEXT = "Remedy Clear is an educational tool using public research. We aren't connected to specific doctors or institutions. This isn't medical advice. Always check with a qualified healthcare provider before making health decisions.";

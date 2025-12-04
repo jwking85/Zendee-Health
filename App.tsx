@@ -128,7 +128,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans text-gray-900 bg-[#FAFAF9] selection:bg-teal-100 selection:text-teal-900 overflow-x-hidden">
+    <div className="min-h-screen flex flex-col font-sans text-gray-900 bg-gradient-to-b from-[#F9FBFB] via-white to-[#FAFAF9] selection:bg-teal-100 selection:text-teal-900 overflow-x-hidden">
       <Header isPro={isPro} onToggle={() => setIsPro(!isPro)} />
 
       {/* Overlays */}
@@ -150,34 +150,100 @@ const App: React.FC = () => {
         <ProfilePrompt onSave={handleProfileSave} onSkip={handleProfileSkip} />
       )}
 
-      <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-24">
-        
+      <main className="flex-grow w-full">
+
         {/* Hero Section */}
-        <div className={`text-center max-w-3xl mx-auto transition-all duration-700 ease-in-out ${data || isLoading ? 'mb-12' : 'min-h-[60vh] flex flex-col justify-center mb-0'}`}>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight leading-[1.1] drop-shadow-sm font-serif">
-            Two Paths. <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-500">One Health.</span>
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Compare standard medicine with root-cause protocols. Decide what works for you.
-          </p>
+        <section className="bg-slate-50">
+          <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-10 sm:px-6 sm:py-14">
+            {/* Top Block - Heading + Subtext */}
+            <div className="text-center sm:text-left">
+              <h1 className="text-4xl font-extrabold tracking-tight text-brand-dark sm:text-5xl">
+                Real answers.<br />
+                <span className="text-brand-teal font-serif italic">Real relief.</span>
+              </h1>
 
-          <SearchInput 
-            value={query} 
-            onChange={(e) => setQuery(e.target.value)} 
-            onSubmit={handleSearch}
-            isLoading={isLoading}
-          />
-          
-          <QuickSearchChips 
-            suggestions={SAMPLE_QUERIES} 
-            history={history}
-            onSelect={handleQuickSelect}
-            onClearHistory={() => { clearHistory(); setHistory([]); }}
-          />
+              <p className="mt-3 text-base text-slate-700 sm:text-lg">
+                Tell us a symptom or diagnosis and we'll show you how standard medicine and root-cause care stack up—side by side.
+              </p>
+            </div>
 
-          {!data && !isLoading && <TestimonialTicker />}
-        </div>
+            {/* Card Block - Main Tool */}
+            <div className="mx-auto w-full max-w-xl">
+              <div className="rounded-3xl bg-white p-5 shadow-lg shadow-teal-100/60 ring-1 ring-slate-100 sm:p-6">
+                <label className="block text-sm font-medium text-slate-600">
+                  Describe a symptom or diagnosis
+                </label>
+
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="block w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base placeholder-gray-400 shadow-inner focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20 sm:py-3.5 sm:text-lg"
+                    placeholder="e.g., constant heartburn, fatty liver, chronic headaches"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    disabled={isLoading}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !isLoading && query.trim()) {
+                        handleSearch();
+                      }
+                    }}
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleSearch}
+                  disabled={isLoading || !query.trim()}
+                  className="mt-3 flex w-full items-center justify-center rounded-xl bg-brand-teal px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-brand-teal/90 focus:outline-none focus:ring-2 focus:ring-brand-teal/30 disabled:opacity-50 sm:py-3.5 sm:text-lg"
+                >
+                  {isLoading ? 'Analyzing...' : 'Find Relief'}
+                </button>
+
+                <div className="mt-4">
+                  <p className="text-xs font-semibold tracking-wide text-slate-500">
+                    QUICK SUGGESTIONS:
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {history.length > 0 ? (
+                      <>
+                        {history.map((q, idx) => (
+                          <button
+                            type="button"
+                            key={`hist-${idx}`}
+                            onClick={() => handleQuickSelect(q)}
+                            className="cursor-pointer rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200 sm:text-sm"
+                          >
+                            {q}
+                          </button>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        {SAMPLE_QUERIES.slice(0, 6).map((q) => (
+                          <button
+                            type="button"
+                            key={q}
+                            onClick={() => handleQuickSelect(q)}
+                            className="cursor-pointer rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200 sm:text-sm"
+                          >
+                            {q}
+                          </button>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial Ticker */}
+            {!data && !isLoading && (
+              <div className="mx-auto w-full max-w-xl">
+                <TestimonialTicker />
+              </div>
+            )}
+          </div>
+        </section>
 
         {/* Loading State */}
         {isLoading && (
@@ -210,7 +276,8 @@ const App: React.FC = () => {
             />
             
             <div className="mt-12 flex flex-col items-center gap-6">
-              <button 
+              <button
+                type="button"
                 onClick={() => setShowShare(true)}
                 className="px-8 py-3 bg-white border border-teal-100 text-teal-700 font-bold rounded-xl shadow-lg shadow-teal-50 hover:shadow-xl hover:scale-105 transition-all duration-300 active:scale-95"
               >

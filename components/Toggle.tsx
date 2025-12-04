@@ -11,7 +11,7 @@ export const Toggle: React.FC<ToggleProps> = ({ isPro, onToggle }) => {
     <button
       onClick={onToggle}
       className={`
-        relative flex items-center p-1 rounded-full h-10 transition-all duration-300 cursor-pointer border
+        relative flex items-center p-1 rounded-full h-10 transition-all duration-300 ease-in-out cursor-pointer border-2
         ${isPro ? 'bg-amber-50 border-amber-200' : 'bg-gray-100 border-gray-200'}
       `}
     >
@@ -32,9 +32,9 @@ export const Toggle: React.FC<ToggleProps> = ({ isPro, onToggle }) => {
       </div>
       
       {/* Sliding Background */}
-      <div 
+      <div
         className={`
-          absolute top-1 bottom-1 rounded-full shadow-sm transition-all duration-300
+          absolute top-1 bottom-1 rounded-full shadow-md transition-all duration-300 ease-in-out
           ${isPro ? 'left-[calc(50%+2px)] right-1 bg-gradient-to-r from-amber-400 to-amber-500' : 'left-1 right-[calc(50%+2px)] bg-teal-600'}
         `}
       />
