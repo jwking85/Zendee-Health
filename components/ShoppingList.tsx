@@ -34,7 +34,9 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ products }) => {
       <ul className="space-y-3">
         {uniqueProducts.map((product, idx) => {
           const name = String(product).trim();
-          const affiliateUrl = affiliateLinks[name]; // Exact match
+
+          // Try to find an affiliate URL for this exact item text
+          const affiliateUrl = affiliateLinks[name];
           const fallbackSearchUrl = `https://www.amazon.com/s?k=${encodeURIComponent(
             name
           )}`;
@@ -42,33 +44,24 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ products }) => {
           const hasAffiliate = Boolean(affiliateUrl);
 
           return (
-            <li
-              key={idx}
-              className="flex items-start gap-3 text-sm text-gray-700 group"
-            >
-              <div className="w-4 h-4 border-2 border-gray-300 rounded mt-0.5 flex-shrink-0 group-hover:border-teal-500 transition-colors"></div>
-
-              <div className="flex-grow">
-                <span className="group-hover:text-gray-900 transition-colors">
-                  {name}
-                </span>
-
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-2 inline-flex items-center gap-0.5 text-xs text-teal-500 hover:text-teal-700 hover:underline opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  {hasAffiliate ? "View on Amazon" : "Search on Amazon"}
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-
-                {hasAffiliate && (
-                  <span className="ml-2 text-[10px] text-gray-400">
-                    (affiliate link)
+            <li key={idx} className="text-sm text-gray-700">
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 group"
+              >
+                <div className="w-4 h-4 border-2 border-gray-300 rounded mt-0.5 flex-shrink-0 group-hover:border-teal-500 transition-colors" />
+                <div className="flex-grow">
+                  <span className="group-hover:text-gray-900 transition-colors">
+                    {name}
                   </span>
-                )}
-              </div>
+                  <div className="mt-0.5 inline-flex items-center gap-1 text-[11px] text-teal-600 group-hover:text-teal-700">
+                    {hasAffiliate ? "View on Amazon" : "Search on Amazon"}
+                    <ExternalLink className="w-3 h-3" />
+                  </div>
+                </div>
+              </a>
             </li>
           );
         })}
