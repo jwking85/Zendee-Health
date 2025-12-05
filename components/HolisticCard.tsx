@@ -13,9 +13,9 @@ const slugify = (text: string): string => {
     .trim();
 };
 
-// Helper function to create affiliate URLs
-const makeAffiliateUrl = (item: string): string => {
-  return affiliateLinks[item] ?? `/shop?item=${encodeURIComponent(item)}`;
+// Helper function to create affiliate URLs (returns null if no affiliate link exists)
+const makeAffiliateUrl = (item: string): string | null => {
+  return affiliateLinks[item] ?? null;
 };
 
 interface HolisticCardProps {
@@ -141,19 +141,26 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro, onUnloc
                         Shopping List
                       </p>
                       <ul className="space-y-2">
-                        {protocol.shoppingList.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm">
-                            <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
-                            <a
-                              href={makeAffiliateUrl(item)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="font-medium text-emerald-700 underline decoration-emerald-300 decoration-2 underline-offset-2 transition hover:text-emerald-800 hover:decoration-emerald-500"
-                            >
-                              {item}
-                            </a>
-                          </li>
-                        ))}
+                        {protocol.shoppingList.map((item, i) => {
+                          const affiliateUrl = makeAffiliateUrl(item);
+                          return (
+                            <li key={i} className="flex items-start gap-2 text-sm">
+                              <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                              {affiliateUrl ? (
+                                <a
+                                  href={affiliateUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-medium text-emerald-700 underline decoration-emerald-300 decoration-2 underline-offset-2 transition hover:text-emerald-800 hover:decoration-emerald-500"
+                                >
+                                  {item}
+                                </a>
+                              ) : (
+                                <span className="font-medium text-emerald-800">{item}</span>
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   )}
