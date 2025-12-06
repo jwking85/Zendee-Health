@@ -3,6 +3,7 @@ import { getHealthAdvice } from './services/aiRouter';
 import { getUserProfile, saveUserProfile, saveFeedback, addToHistory, getHistory, clearHistory } from './services/storageService';
 import { EMERGENCY_KEYWORDS, SAMPLE_QUERIES } from './constants';
 import { HealthResponse, UserProfile } from './types';
+import { trackEvent } from './src/lib/analytics';
 
 // Components
 import { EmergencyWarning } from './components/EmergencyWarning';
@@ -84,6 +85,12 @@ const App: React.FC = () => {
     setResultCount(Math.floor(Math.random() * (200 - 50 + 1) + 50));
     setShowProfilePrompt(false);
 
+    // Track symptom search event
+    trackEvent('symptom_search', {
+      symptom: searchTerm,
+      has_profile: !!userProfile,
+    });
+
     try {
       // 4s delay for the "Aha Moment"
       const [result] = await Promise.all([
@@ -93,11 +100,23 @@ const App: React.FC = () => {
 
       console.log("AI Raw Response:", result);
       setData(result);
+
+      // Track successful result
+      trackEvent('search_completed', {
+        symptom: searchTerm,
+      });
+
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     } catch (err: any) {
       setError(err.message || "Failed to fetch health insights. Please try again.");
+
+      // Track error
+      trackEvent('search_error', {
+        symptom: searchTerm,
+        error: err.message,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -126,6 +145,12 @@ const App: React.FC = () => {
 
   const handleFeedback = (response: string) => {
     saveFeedback(query, response);
+
+    // Track feedback event
+    trackEvent('feedback_submitted', {
+      symptom: query,
+      feedback: response,
+    });
   };
 
   return (
@@ -292,7 +317,10 @@ const App: React.FC = () => {
             <div className="mt-12 flex flex-col items-center gap-6">
               <button
                 type="button"
-                onClick={() => setShowShare(true)}
+                onClick={() => {
+                  setShowShare(true);
+                  trackEvent('share_clicked', { symptom: query });
+                }}
                 className="px-8 py-3 bg-white border border-teal-100 text-teal-700 font-bold rounded-xl shadow-lg shadow-teal-50 hover:shadow-xl hover:scale-105 transition-all duration-300 active:scale-95"
               >
                 📤 Share Results
