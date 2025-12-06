@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Copy, Check } from 'lucide-react';
 
 interface ShareCardProps {
@@ -33,6 +33,17 @@ export const ShareCard: React.FC<ShareCardProps> = ({ onClose, symptom, rootCaus
 
   const twitterText = `Found this tool that compares medical and natural approaches for health issues. Shows both perspectives side by side. ${shareUrl}`;
 
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(combinedShare);
@@ -53,12 +64,22 @@ export const ShareCard: React.FC<ShareCardProps> = ({ onClose, symptom, rootCaus
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-md animate-fade-in">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-md animate-fade-in"
+      onClick={handleBackdropClick}
+    >
       <div className="bg-white rounded-[2rem] shadow-2xl max-w-sm w-full overflow-hidden relative border border-gray-100 transform transition-all scale-100">
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur hover:bg-white/40 rounded-full transition-colors text-gray-500 hover:text-gray-800 z-20"
+          className="absolute top-4 right-4 z-50 p-2.5 bg-white hover:bg-gray-100 rounded-full transition-colors text-gray-700 hover:text-gray-900 shadow-lg border border-gray-200"
           aria-label="Close share card"
         >
           <X className="w-5 h-5" />
@@ -151,6 +172,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ onClose, symptom, rootCaus
           </p>
           <div className="flex gap-2">
             <button
+              type="button"
               onClick={handleCopy}
               className="flex-1 py-3 bg-gray-900 text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-gray-800 transition-all active:scale-95 flex items-center justify-center gap-2 text-sm"
             >
@@ -165,6 +187,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ onClose, symptom, rootCaus
               )}
             </button>
             <button
+              type="button"
               onClick={handleShareTwitter}
               className="p-3 bg-blue-50 text-blue-500 rounded-xl hover:bg-blue-100 transition-colors"
               aria-label="Share on X (Twitter)"
@@ -174,6 +197,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ onClose, symptom, rootCaus
               </svg>
             </button>
             <button
+              type="button"
               onClick={handleShareFacebook}
               className="p-3 bg-indigo-50 text-indigo-600 rounded-xl hover:bg-indigo-100 transition-colors"
               aria-label="Share on Facebook"
