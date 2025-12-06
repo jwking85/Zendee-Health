@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import React, { useState, ReactNode } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface CollapsibleSectionProps {
   label: string;
   badge?: string;
   defaultOpen?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
@@ -14,37 +14,41 @@ export const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
   defaultOpen = false,
   children,
 }) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="rounded-2xl border border-emerald-100 bg-white/70">
+    <section className="rounded-2xl border border-emerald-100 bg-white/80 shadow-sm">
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between gap-2 px-4 py-3 text-left hover:bg-emerald-50/50 transition-colors rounded-2xl"
+        onClick={() => setOpen((prev) => !prev)}
+        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
       >
-        <div className="flex items-center gap-2">
-          {isOpen ? (
-            <ChevronDown className="h-4 w-4 text-emerald-600" />
-          ) : (
-            <ChevronRight className="h-4 w-4 text-emerald-600" />
-          )}
+        <div className="flex flex-col gap-1">
           <span className="text-sm font-semibold text-emerald-900">
             {label}
           </span>
           {badge && (
-            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-emerald-700">
+            <span className="inline-flex w-fit items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-emerald-700">
               {badge}
             </span>
           )}
         </div>
+        <ChevronDown
+          className={`h-4 w-4 text-emerald-600 transition-transform ${
+            open ? "rotate-180" : ""
+          }`}
+        />
       </button>
 
-      {isOpen && (
-        <div className="border-t border-emerald-100 px-4 py-3 text-sm text-slate-800">
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden border-t border-emerald-100 px-4 pb-4 pt-3 text-sm text-slate-700">
           {children}
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 };

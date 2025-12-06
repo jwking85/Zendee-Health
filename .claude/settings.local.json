@@ -3,7 +3,11 @@
     "allow": [
       "Bash(npm run dev:*)",
       "Bash(npx tsc --noEmit)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []
