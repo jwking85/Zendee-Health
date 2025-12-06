@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { DISCLAIMER_TEXT } from '../constants';
 
 export const Footer: React.FC = () => {
@@ -9,12 +10,36 @@ export const Footer: React.FC = () => {
           {DISCLAIMER_TEXT}
         </p>
         <div className="flex items-center justify-center gap-6 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-          <span className="cursor-pointer hover:text-gray-600">Privacy Policy</span>
+          <Link
+            to="/about"
+            className="hover:text-teal-600 transition-colors"
+          >
+            About
+          </Link>
           <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-          <span className="cursor-pointer hover:text-gray-600">Terms of Use</span>
+          <Link
+            to="/contact"
+            className="hover:text-teal-600 transition-colors"
+          >
+            Contact
+          </Link>
+          <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+          <Link
+            to="/privacy-policy"
+            className="hover:text-teal-600 transition-colors"
+          >
+            Privacy Policy
+          </Link>
+          <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+          <Link
+            to="/terms-of-use"
+            className="hover:text-teal-600 transition-colors"
+          >
+            Terms of Use
+          </Link>
         </div>
         <div className="mt-8 text-xs text-gray-300">
-          © 2025 Remedy Clear
+          © {new Date().getFullYear()} RemedyClear
         </div>
       </div>
     </footer>
