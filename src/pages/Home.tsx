@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getHealthAdvice } from '../services/aiRouter';
-import { getUserProfile, saveUserProfile, saveFeedback, addToHistory, getHistory } from '../services/storageService';
-import { EMERGENCY_KEYWORDS, SAMPLE_QUERIES } from '../constants';
-import { HealthResponse, UserProfile } from '../types';
+import { getHealthAdvice } from '../../services/aiRouter';
+import { getUserProfile, saveUserProfile, saveFeedback, addToHistory, getHistory } from '../../services/storageService';
+import { EMERGENCY_KEYWORDS, SAMPLE_QUERIES } from '../../constants';
+import { HealthResponse, UserProfile } from '../../types';
 import { trackEvent } from '../lib/analytics';
 
 // Components
-import { EmergencyWarning } from '../components/EmergencyWarning';
-import { ResultsSection } from '../components/ResultsSection';
-import { WaitlistModal } from '../components/WaitlistModal';
-import { LoadingSequence } from '../components/LoadingSequence';
-import { TestimonialTicker } from '../components/TestimonialTicker';
-import { ShareCard } from '../components/ShareCard';
-import { ProfilePrompt } from '../components/ProfilePrompt';
-import { FeedbackPrompt } from '../components/FeedbackPrompt';
+import { EmergencyWarning } from '../../components/EmergencyWarning';
+import { ResultsSection } from '../../components/ResultsSection';
+import { WaitlistModal } from '../../components/WaitlistModal';
+import { LoadingSequence } from '../../components/LoadingSequence';
+import { TestimonialTicker } from '../../components/TestimonialTicker';
+import { ShareCard } from '../../components/ShareCard';
+import { ProfilePrompt } from '../../components/ProfilePrompt';
+import { FeedbackPrompt } from '../../components/FeedbackPrompt';
 import { Users } from 'lucide-react';
 
 const Home: React.FC = () => {
