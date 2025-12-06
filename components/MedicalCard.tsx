@@ -16,7 +16,7 @@ export const MedicalCard: React.FC<MedicalCardProps> = ({ data }) => {
             <Stethoscope className="w-6 h-6 text-clarity-slate" />
           </div>
           <div>
-            <h3 className="text-xl font-bold font-heading text-clarity-slate tracking-tight">Standard Medical</h3>
+            <h3 className="text-xl font-bold font-heading text-clarity-slate tracking-tight">Standard Medical View</h3>
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Conventional Approach</span>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { fetchHealthAdvice } from './services/geminiService';
+import { getHealthAdvice } from './services/aiRouter';
 import { getUserProfile, saveUserProfile, saveFeedback, addToHistory, getHistory, clearHistory } from './services/storageService';
 import { EMERGENCY_KEYWORDS, SAMPLE_QUERIES } from './constants';
 import { HealthResponse, UserProfile } from './types';
@@ -87,10 +87,11 @@ const App: React.FC = () => {
     try {
       // 4s delay for the "Aha Moment"
       const [result] = await Promise.all([
-        fetchHealthAdvice(searchTerm, userProfile),
-        new Promise(resolve => setTimeout(resolve, 4000)) 
+        getHealthAdvice(searchTerm, userProfile),
+        new Promise(resolve => setTimeout(resolve, 4000))
       ]);
-      
+
+      console.log("AI Raw Response:", result);
       setData(result);
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -281,11 +282,11 @@ const App: React.FC = () => {
                 {resultCount} people looked this up this week
              </div>
 
-             <ResultsSection 
-              data={data} 
-              isPro={isPro} 
-              onUnlockAttempt={() => setShowWaitlist(true)}
-              resultsRef={resultsRef} 
+             <ResultsSection
+              data={data}
+              isPro={isPro}
+              resultsRef={resultsRef}
+              symptom={query}
             />
             
             <div className="mt-12 flex flex-col items-center gap-6">

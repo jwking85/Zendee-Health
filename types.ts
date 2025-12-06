@@ -16,9 +16,9 @@ export interface HolisticProtocol {
   focusArea: string;
   title: string;
   approach: string;
-  details?: string;
-  reasoning?: string;
-  shoppingList?: string[];
+  details: string;
+  reasoning: string;
+  shoppingList: string[];
 }
 
 export interface HolisticPath {
@@ -29,8 +29,18 @@ export interface HolisticPath {
 }
 
 export interface HealthResponse {
-  standard: MedicalPath;
-  holistic: HolisticPath;
+  standard: {
+    diagnosis: string;
+    rationale: string;
+    redFlags: string[];
+    whatToAskDoctor: string[];
+  };
+  holistic: {
+    protocols: HolisticProtocol[];
+    lifestyle: string[];
+    supplements: string[];
+    cautions: string[];
+  };
 }
 
 export type LoadingStage = 'idle' | 'analyzing' | 'researching' | 'comparing' | 'finalizing';
