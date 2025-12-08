@@ -1,15 +1,16 @@
 import React from "react";
 import { ShoppingCart, Printer, ExternalLink } from "lucide-react";
-import { affiliateLinks } from "../constants/affiliateLinks";
+import { resolveAffiliateUrl } from "../src/lib/affiliate";
 
 interface ShoppingListProps {
-  products: string[];
+  products: string[]; // Strings from AI output
 }
 
 export const ShoppingList: React.FC<ShoppingListProps> = ({ products }) => {
-  const uniqueProducts = [...new Set(products)];
+  if (!products || products.length === 0) return null;
 
-  if (uniqueProducts.length === 0) return null;
+  // Deduplicate
+  const uniqueProducts = [...new Set(products.map((p) => String(p).trim()))];
 
   const handlePrint = () => {
     window.print();
@@ -23,6 +24,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ products }) => {
           Shopping List
         </h5>
         <button
+          type="button"
           onClick={handlePrint}
           className="p-1.5 text-gray-400 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-colors"
           title="Print List"
@@ -32,16 +34,9 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ products }) => {
       </div>
 
       <ul className="space-y-3">
-        {uniqueProducts.map((product, idx) => {
-          const name = String(product).trim();
-
-          // Try to find an affiliate URL for this exact item text
-          const affiliateUrl = affiliateLinks[name];
-          const fallbackSearchUrl = `https://www.amazon.com/s?k=${encodeURIComponent(
-            name
-          )}`;
-          const href = affiliateUrl ?? fallbackSearchUrl;
-          const hasAffiliate = Boolean(affiliateUrl);
+        {uniqueProducts.map((name, idx) => {
+          // Unified resolver handles direct affiliate links + fallback Amazon search
+          const href = resolveAffiliateUrl(name);
 
           return (
             <li key={idx} className="text-sm text-gray-700">
@@ -52,12 +47,14 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ products }) => {
                 className="flex items-start gap-3 group"
               >
                 <div className="w-4 h-4 border-2 border-gray-300 rounded mt-0.5 flex-shrink-0 group-hover:border-teal-500 transition-colors" />
+
                 <div className="flex-grow">
                   <span className="group-hover:text-gray-900 transition-colors">
                     {name}
                   </span>
+
                   <div className="mt-0.5 inline-flex items-center gap-1 text-[11px] text-teal-600 group-hover:text-teal-700">
-                    {hasAffiliate ? "View on Amazon" : "Search on Amazon"}
+                    View on Amazon
                     <ExternalLink className="w-3 h-3" />
                   </div>
                 </div>
@@ -69,7 +66,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ products }) => {
 
       <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center text-xs text-gray-400">
         <span>{uniqueProducts.length} items</span>
-        <span className="italic">Zendee Recommendations</span>
+        <span className="italic">RemedyClear Recommendations</span>
       </div>
     </div>
   );
