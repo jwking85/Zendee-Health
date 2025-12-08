@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
           </Link>
         </div>
         <div className="mt-8 text-xs text-gray-300">
-          © {new Date().getFullYear()} RemedyClear
+          © {new Date().getFullYear()} Remedy Clear
         </div>
       </div>
     </footer>

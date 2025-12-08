@@ -1,5 +1,5 @@
 // src/services/storageService.ts
-// Safe, lightweight wrapper around localStorage for RemedyClear
+// Safe, lightweight wrapper around localStorage for Remedy Clear
 
 const isBrowser = typeof window !== "undefined";
 

@@ -6,11 +6,11 @@ const Contact: React.FC = () => {
   );
 
   useEffect(() => {
-    const title = "Contact RemedyClear";
+    const title = "Contact Remedy Clear";
     const description =
-      "Contact RemedyClear with questions, feedback, or suggestions about our health comparison tools.";
+      "Contact Remedy Clear with questions, feedback, or suggestions about our health comparison tools.";
 
-    document.title = `${title} | RemedyClear`;
+    document.title = `${title} | Remedy Clear`;
 
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) {
@@ -35,12 +35,12 @@ const Contact: React.FC = () => {
     <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-slate-800">
       <h1 className="text-3xl sm:text-4xl font-bold mb-4">Contact Us</h1>
       <p className="text-sm text-slate-500 mb-6">
-        Have questions, feedback, or ideas for RemedyClear? Reach out below.
+        Have questions, feedback, or ideas for Remedy Clear? Reach out below.
       </p>
 
       <section className="space-y-6 text-sm sm:text-base leading-relaxed mb-8">
         <p>
-          We&apos;re always working to make RemedyClear clearer, calmer, and
+          We&apos;re always working to make Remedy Clear clearer, calmer, and
           more helpful. If you notice something that doesn&apos;t seem right, or
           if you have ideas for new features or topics, we&apos;d be grateful to
           hear from you.

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 const TermsOfUse: React.FC = () => {
   useEffect(() => {
-    const title = "Terms of Use | RemedyClear";
+    const title = "Terms of Use | Remedy Clear";
     const description =
-      "Read the Terms of Use for RemedyClear, including important disclaimers, user responsibilities, and limitations of liability.";
+      "Read the Terms of Use for Remedy Clear, including important disclaimers, user responsibilities, and limitations of liability.";
 
     document.title = title;
 
@@ -27,15 +27,15 @@ const TermsOfUse: React.FC = () => {
       <section className="space-y-6 text-sm sm:text-base leading-relaxed">
         <p>
           These Terms of Use (&quot;Terms&quot;) govern your access to and use
-          of the RemedyClear website, tools, and services (collectively, the
+          of the Remedy Clear website, tools, and services (collectively, the
           &quot;Service&quot;). By accessing or using the Service, you agree to
           be bound by these Terms. If you do not agree, do not use the Service.
         </p>
 
-        <h2 className="text-xl font-semibold mt-8 mb-3">1. About RemedyClear</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-3">1. About Remedy Clear</h2>
 
         <p>
-          RemedyClear is an informational and educational platform that compares
+          Remedy Clear is an informational and educational platform that compares
           conventional medical approaches with holistic, lifestyle, and natural
           options for various symptoms and concerns. The Service is designed to
           help you explore different perspectives on health, not to replace
@@ -48,7 +48,7 @@ const TermsOfUse: React.FC = () => {
 
         <ul className="list-disc ml-6 space-y-2">
           <li>
-            The content, comparisons, and suggestions provided by RemedyClear
+            The content, comparisons, and suggestions provided by Remedy Clear
             are for informational and educational purposes only.
           </li>
           <li>
@@ -126,7 +126,7 @@ const TermsOfUse: React.FC = () => {
 
         <p>
           The Service, including its content, design, and underlying technology,
-          is owned or licensed by RemedyClear and is protected by copyright,
+          is owned or licensed by Remedy Clear and is protected by copyright,
           trademark, and other intellectual property laws. You are granted a
           limited, non-exclusive, non-transferable license to access and use the
           Service for personal, non-commercial purposes.
@@ -199,7 +199,7 @@ const TermsOfUse: React.FC = () => {
         <h2 className="text-xl font-semibold mt-8 mb-3">9. Indemnification</h2>
 
         <p>
-          You agree to indemnify, defend, and hold harmless RemedyClear and its
+          You agree to indemnify, defend, and hold harmless Remedy Clear and its
           owners, officers, employees, and partners from and against any claims,
           liabilities, damages, losses, and expenses (including reasonable
           attorneys&apos; fees) arising out of or in any way connected with:

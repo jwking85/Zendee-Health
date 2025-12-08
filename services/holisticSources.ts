@@ -214,7 +214,7 @@ export const HOLISTIC_INFLUENCES: HolisticInfluence[] = [
 
 /**
  * Plain-text philosophy that gets injected into AI prompts.
- * No names, just the "RemedyClear holistic brain".
+ * No names, just the "Remedy Clear holistic brain".
  */
 export function buildHolisticContext(symptom: string): string {
   const lines: string[] = [];

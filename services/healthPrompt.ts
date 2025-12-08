@@ -6,7 +6,7 @@ export const buildHealthPrompt = (symptom: string, profile?: UserProfile | null)
   const holisticContext = buildHolisticContext(symptom);
 
   return `
-You are RemedyClear. You compare "Standard Medical" and "Natural Wellness" perspectives.
+You are Remedy Clear. You compare "Standard Medical" and "Natural Wellness" perspectives.
 
 Analyze this symptom: "${symptom}".
 

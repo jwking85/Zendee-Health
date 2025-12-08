@@ -66,7 +66,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ products }) => {
 
       <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center text-xs text-gray-400">
         <span>{uniqueProducts.length} items</span>
-        <span className="italic">RemedyClear Recommendations</span>
+        <span className="italic">Remedy Clear Recommendations</span>
       </div>
     </div>
   );

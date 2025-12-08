@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 const PrivacyPolicy: React.FC = () => {
   useEffect(() => {
-    const title = "Privacy Policy | RemedyClear";
+    const title = "Privacy Policy | Remedy Clear";
     const description =
-      "Learn how RemedyClear collects, uses, and protects your information when you use our health comparison and education tools.";
+      "Learn how Remedy Clear collects, uses, and protects your information when you use our health comparison and education tools.";
 
     document.title = title;
 
@@ -26,7 +26,7 @@ const PrivacyPolicy: React.FC = () => {
 
       <section className="space-y-6 text-sm sm:text-base leading-relaxed">
         <p>
-          This Privacy Policy describes how RemedyClear (&quot;we&quot;,
+          This Privacy Policy describes how Remedy Clear (&quot;we&quot;,
           &quot;us&quot;, or &quot;our&quot;) collects, uses, and protects your
           information when you visit our website, use our symptom checker, or
           interact with our holistic vs. conventional comparison tools
@@ -166,7 +166,7 @@ const PrivacyPolicy: React.FC = () => {
             request.
           </li>
           <li>
-            To protect the rights, property, or safety of RemedyClear, our
+            To protect the rights, property, or safety of Remedy Clear, our
             users, or the public.
           </li>
           <li>

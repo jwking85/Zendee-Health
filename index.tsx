@@ -6,7 +6,7 @@ import { initAnalytics } from './src/lib/analytics';
 // ===================================================
 // INITIALIZE GOOGLE ANALYTICS 4 BEFORE REACT RENDERS
 // ===================================================
-console.log('%c[APP] 🚀 Starting RemedyClear application...', 'color: #2AB3A5; font-weight: bold;');
+console.log('%c[APP] 🚀 Starting Remedy Clear application...', 'color: #2AB3A5; font-weight: bold;');
 
 // Initialize GA4 tracking
 initAnalytics();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Toggle } from './Toggle';
-import RemedyClearLogo from '../assets/remedy-clear-logo-light.png';
+import Remedy ClearLogo from '../assets/remedy-clear-logo-light.png';
 
 interface HeaderProps {
   isPro: boolean;
@@ -17,7 +17,7 @@ export const Header: React.FC<HeaderProps> = ({ isPro, onToggle }) => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <img
-            src={RemedyClearLogo}
+            src={Remedy ClearLogo}
             alt="Remedy Clear"
             className="h-16 w-auto md:h-20 lg:h-24 object-contain drop-shadow-sm"
           />
