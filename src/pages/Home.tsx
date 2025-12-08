@@ -174,10 +174,10 @@ const Home: React.FC = () => {
 
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/30">
-          <div className="mx-auto max-w-6xl px-4 py-6 md:py-10">
+          <div className="mx-auto max-w-6xl px-4 py-4 md:py-6">
             <div className="mx-auto max-w-3xl">
               {/* Headline */}
-              <div className="mb-6 text-center md:mb-8">
+              <div className="mb-5 text-center md:mb-6">
                 <h1 className="text-[32px] font-extrabold leading-[1.15] tracking-tight text-brand-dark md:text-[52px] md:leading-[1.1]">
                   Real answers.<br />
                   <span className="text-brand-teal font-serif italic">Real relief.</span>

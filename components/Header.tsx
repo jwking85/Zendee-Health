@@ -10,7 +10,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ isPro, onToggle }) => {
   return (
     <header className="sticky top-0 z-50 w-full border-b-2 border-slate-200 bg-white/95 backdrop-blur-md shadow-sm">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 md:py-5">
         {/* LEFT: Remedy Clear logo */}
         <div
           className="cursor-pointer transition-transform duration-200 hover:scale-105"
