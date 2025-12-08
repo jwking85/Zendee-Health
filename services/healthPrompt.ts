@@ -22,6 +22,7 @@ interface RecommendationResponse {
   symptom: string;
   summary: string;
   disclaimer: string;
+  keyDifference: string;
 
   standardDiagnosis: string;
   standardExplanation: string;
@@ -43,6 +44,7 @@ interface Product {
   usageNotes: string;
   amazonSearchQuery: string;
   priority: number;
+  recommendedFor?: 'standard' | 'holistic' | 'both';
 }
 
 Current user input:
@@ -75,6 +77,11 @@ ${holisticContext}
 - disclaimer:
   Brief, clear, non-alarmist reminder that this is not medical advice,
   and to seek urgent care for serious or worsening symptoms.
+
+- keyDifference:
+  One sentence, plain language, showing the main contrast between the two views.
+  Example:
+  "Standard view focuses on reducing stomach acid, while some holistic practitioners see recurring heartburn as a possible sign of low stomach acid and sluggish digestion."
 
 - standardDiagnosis:
   What a clinician might commonly call this symptom cluster.
@@ -129,6 +136,7 @@ ${holisticContext}
     - usageNotes: simple usage notes with no medical dosing
     - amazonSearchQuery: a search phrase that would likely surface good options, e.g. "sugar free throat lozenges", "organic ginger tea bags"
     - priority: 1–10 (1 = highest priority / most foundational)
+    - recommendedFor: "standard" (if mainly based on conventional treatments), "holistic" (if mainly based on natural protocols), or "both" (if relevant to both sides)
 
 3. SAFETY
    - Never encourage stopping prescribed medications or ignoring urgent symptoms.

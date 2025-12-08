@@ -24,6 +24,8 @@ export interface Product {
   usageNotes: string;
   amazonSearchQuery: string;
   priority: number;
+  // Which view this product is mostly inspired by
+  recommendedFor?: 'standard' | 'holistic' | 'both';
 }
 
 /**
@@ -39,6 +41,9 @@ export interface RecommendationResponse {
 
   // Global safety disclaimer
   disclaimer: string;
+
+  // Short, one-sentence contrast between views
+  keyDifference: string;
 
   // 🔹 Standard medical view
   standardDiagnosis: string;           // e.g. "Gastroesophageal reflux (heartburn)"

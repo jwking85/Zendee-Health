@@ -52,14 +52,14 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data }) => {
 
       <div className="border-t border-emerald-100" />
 
-      <div className="px-6 pb-6 pt-4 space-y-5">
+      <div className="px-6 pb-6 pt-4 space-y-6">
         {/* Root Cause */}
         {holisticRootCause && (
           <section>
-            <h3 className="text-xs font-semibold tracking-wide text-emerald-800 uppercase mb-1.5">
+            <h3 className="text-xs font-semibold tracking-wide text-emerald-700 uppercase mb-2">
               Holistic Perspective
             </h3>
-            <p className="text-sm text-emerald-900 italic">
+            <p className="text-sm text-emerald-900 italic leading-relaxed">
               {holisticRootCause}
             </p>
           </section>
@@ -68,7 +68,7 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data }) => {
         {/* Explanation */}
         {holisticExplanation && (
           <section>
-            <h3 className="text-xs font-semibold tracking-wide text-emerald-800 uppercase mb-1.5">
+            <h3 className="text-xs font-semibold tracking-wide text-emerald-700 uppercase mb-2">
               Explanation
             </h3>
             <p className="text-sm text-emerald-900 leading-relaxed">
@@ -80,12 +80,12 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data }) => {
         {/* Holistic protocols - now simple bullet points */}
         {holisticProtocols?.length > 0 && (
           <section>
-            <h3 className="text-xs font-semibold tracking-wide text-emerald-800 uppercase mb-2">
+            <h3 className="text-xs font-semibold tracking-wide text-emerald-700 uppercase mb-2">
               Natural Approaches
             </h3>
             <ul className="space-y-2">
               {holisticProtocols.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-sm text-emerald-900">
+                <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed text-emerald-900">
                   <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
                   <span>{item}</span>
                 </li>
@@ -96,32 +96,50 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data }) => {
 
         {/* Products shopping list */}
         {products && products.length > 0 && (
-          <section className="mt-4 rounded-xl border border-emerald-100 bg-emerald-50/70 px-3 py-2.5">
+          <section id="shopping-list" className="mt-4 rounded-xl border border-emerald-100 bg-emerald-50/70 px-3 py-2.5">
             <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-emerald-800 mb-2">
               <ShoppingCart className="h-3.5 w-3.5" />
-              Shopping List
+              Shopping list (inspired by the holistic view)
             </div>
-            <ul className="space-y-1.5 text-xs text-slate-700">
+            <ul className="space-y-2 text-xs text-slate-700">
               {products
                 .sort((a, b) => a.priority - b.priority)
                 .map((product) => {
                   const href = resolveAffiliateUrl(product.amazonSearchQuery || product.name);
                   return (
-                    <li key={product.id} className="flex gap-1.5">
-                      <span className="mt-1 inline-block h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 text-emerald-800 hover:text-emerald-900 hover:underline underline-offset-2"
-                      >
-                        {product.name}
-                      </a>
+                    <li key={product.id} className="flex flex-col gap-1">
+                      <div className="flex items-center gap-2">
+                        <span className="inline-block h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 text-emerald-800 hover:text-emerald-900 hover:underline underline-offset-2"
+                        >
+                          {product.name}
+                        </a>
+                        {product.recommendedFor && (
+                          <span className={`
+                            inline-flex items-center rounded-full px-2 py-0.5 text-[0.65rem] font-medium
+                            ${product.recommendedFor === 'standard'
+                              ? 'bg-slate-100 text-slate-700'
+                              : product.recommendedFor === 'holistic'
+                              ? 'bg-emerald-100 text-emerald-700'
+                              : 'bg-teal-50 text-teal-700'}
+                          `}>
+                            {product.recommendedFor === 'standard'
+                              ? 'Standard pick'
+                              : product.recommendedFor === 'holistic'
+                              ? 'Holistic pick'
+                              : 'Works for both views'}
+                          </span>
+                        )}
+                      </div>
                     </li>
                   );
                 })}
             </ul>
-            <p className="mt-1.5 text-[10px] text-emerald-700/70">
+            <p className="mt-2 text-[10px] text-emerald-700/70">
               Some items use affiliate links. If you purchase through them, Remedy Clear
               may earn a small commission at no extra cost to you.
             </p>

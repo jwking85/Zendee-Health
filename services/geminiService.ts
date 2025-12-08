@@ -66,6 +66,7 @@ export const fetchHealthAdviceGemini = async (
       symptom: parsed?.symptom || symptom,
       summary: parsed?.summary || "",
       disclaimer: parsed?.disclaimer || "This is general educational information, not medical advice. Consult a healthcare professional for personalized care.",
+      keyDifference: parsed?.keyDifference || "",
 
       standardDiagnosis: parsed?.standardDiagnosis || "",
       standardExplanation: parsed?.standardExplanation || "",
@@ -75,7 +76,9 @@ export const fetchHealthAdviceGemini = async (
       holisticExplanation: parsed?.holisticExplanation || "",
       holisticProtocols: Array.isArray(parsed?.holisticProtocols) ? parsed.holisticProtocols : [],
 
-      products: Array.isArray(parsed?.products) ? parsed.products : []
+      products: Array.isArray(parsed?.products)
+        ? parsed.products.map(p => ({ ...p, recommendedFor: p.recommendedFor || 'both' }))
+        : []
     };
 
     return safe;

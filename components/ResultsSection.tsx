@@ -27,15 +27,53 @@ export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, isPro, res
           {data.summary}
         </p>
       )}
+
+      {/* Key difference panel */}
+      {data.keyDifference && (
+        <div className="mt-3 mx-auto max-w-2xl rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+          <p className="font-semibold mb-1 text-slate-800">Key difference at a glance</p>
+          <p className="leading-relaxed">{data.keyDifference}</p>
+        </div>
+      )}
+
       {data.disclaimer && (
         <p className="mt-2 text-xs text-slate-500 text-center max-w-2xl mx-auto mb-6 md:mb-8">
           {data.disclaimer}
         </p>
       )}
 
+      {/* Sticky mini-nav for desktop */}
+      <div className="sticky top-16 z-40 mb-4 hidden w-full justify-center md:flex">
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs shadow-sm backdrop-blur">
+          <button
+            type="button"
+            onClick={() => document.querySelector('#medical-view')?.scrollIntoView({ behavior: 'smooth' })}
+            className="rounded-full px-3 py-1 hover:bg-slate-100 transition-colors"
+          >
+            Medical view
+          </button>
+          <button
+            type="button"
+            onClick={() => document.querySelector('#holistic-view')?.scrollIntoView({ behavior: 'smooth' })}
+            className="rounded-full px-3 py-1 hover:bg-slate-100 transition-colors"
+          >
+            Holistic view
+          </button>
+          <button
+            type="button"
+            onClick={() => document.querySelector('#shopping-list')?.scrollIntoView({ behavior: 'smooth' })}
+            className="rounded-full px-3 py-1 hover:bg-slate-100 transition-colors"
+          >
+            Shopping list
+          </button>
+        </div>
+      </div>
+
       <div className="mt-6 grid gap-6 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1.1fr)] items-start">
         {/* Standard medical view */}
-        <MedicalCard data={data} />
+        <section id="medical-view">
+          <MedicalCard data={data} />
+        </section>
 
         {/* Holistic view with sticky helper on desktop */}
         <div className="relative">
@@ -44,7 +82,9 @@ export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, isPro, res
               ↓ More natural wellness insights on this side
             </span>
           </div>
-          <HolisticCard data={data} isPro={isPro} />
+          <section id="holistic-view">
+            <HolisticCard data={data} isPro={isPro} />
+          </section>
         </div>
       </div>
 
