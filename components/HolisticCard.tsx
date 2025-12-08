@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import type { HealthResponse } from "../types";
 import { CollapsibleSection } from "./CollapsibleSection";
+import { resolveAffiliateUrl } from "../src/lib/affiliate";
 
 type HolisticData = HealthResponse["holistic"];
 
@@ -106,14 +107,33 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data }) => {
                           <ShoppingCart className="h-3.5 w-3.5" />
                           Shopping List
                         </div>
+
                         <ul className="mt-1.5 space-y-1.5 text-xs text-slate-700">
-                          {protocol.shoppingList.map((item, idx) => (
-                            <li key={idx} className="flex gap-1.5">
-                              <span className="mt-1 inline-block h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
+                          {protocol.shoppingList.map((item, idx) => {
+                            const name = String(item).trim();
+                            const href = resolveAffiliateUrl(name);
+
+                            return (
+                              <li key={idx} className="flex gap-1.5">
+                                <span className="mt-1 inline-block h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
+
+                                <a
+                                  href={href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex-1 text-emerald-800 hover:text-emerald-900 hover:underline underline-offset-2"
+                                >
+                                  {name}
+                                </a>
+                              </li>
+                            );
+                          })}
                         </ul>
+
+                        <p className="mt-1.5 text-[10px] text-emerald-700/70">
+                          Some items use affiliate links. If you purchase through them, Remedy Clear
+                          may earn a small commission at no extra cost to you.
+                        </p>
                       </div>
                     )}
                   </div>
