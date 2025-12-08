@@ -1,12 +1,12 @@
 // services/aiRouter.ts
-import type { HealthResponse, UserProfile } from "../types";
+import type { RecommendationResponse, UserProfile } from "../types";
 import { fetchHealthAdviceGemini } from "./geminiService";
 import { fetchHealthAdviceOpenAI } from "./openaiService";
 
 export const getHealthAdvice = async (
   symptom: string,
   profile?: UserProfile | null
-): Promise<HealthResponse> => {
+): Promise<RecommendationResponse> => {
   try {
     return await fetchHealthAdviceGemini(symptom, profile);
   } catch (err) {

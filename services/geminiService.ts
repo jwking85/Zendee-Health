@@ -1,5 +1,5 @@
 // services/geminiService.ts
-import type { HealthResponse, UserProfile } from "../types";
+import type { RecommendationResponse, UserProfile } from "../types";
 import { buildHealthPrompt } from "./healthPrompt";
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -9,7 +9,7 @@ const API_BASE = "https://generativelanguage.googleapis.com/v1beta";
 export const fetchHealthAdviceGemini = async (
   symptom: string,
   profile?: UserProfile | null
-): Promise<HealthResponse> => {
+): Promise<RecommendationResponse> => {
   if (!apiKey) {
     console.error("VITE_GEMINI_API_KEY is missing");
     throw new Error("AI configuration missing");
@@ -53,23 +53,29 @@ export const fetchHealthAdviceGemini = async (
       throw new Error("Invalid response from Gemini");
     }
 
-    const parsed = JSON.parse(rawText);
+    let parsed: RecommendationResponse;
+    try {
+      parsed = JSON.parse(rawText);
+    } catch (e) {
+      console.error("Failed to parse Gemini JSON:", rawText);
+      throw new Error("Invalid JSON from Gemini");
+    }
 
-    const safe: HealthResponse = {
-      standard: {
-        diagnosis:
-          parsed?.standard?.diagnosis ??
-          "No diagnosis summary is available yet.",
-        rationale: parsed?.standard?.rationale ?? "",
-        redFlags: parsed?.standard?.redFlags ?? [],
-        whatToAskDoctor: parsed?.standard?.whatToAskDoctor ?? []
-      },
-      holistic: {
-        protocols: parsed?.holistic?.protocols ?? [],
-        lifestyle: parsed?.holistic?.lifestyle ?? [],
-        supplements: parsed?.holistic?.supplements ?? [],
-        cautions: parsed?.holistic?.cautions ?? []
-      }
+    // Ensure all required fields are present with safe defaults
+    const safe: RecommendationResponse = {
+      symptom: parsed?.symptom || symptom,
+      summary: parsed?.summary || "",
+      disclaimer: parsed?.disclaimer || "This is general educational information, not medical advice. Consult a healthcare professional for personalized care.",
+
+      standardDiagnosis: parsed?.standardDiagnosis || "",
+      standardExplanation: parsed?.standardExplanation || "",
+      standardTreatments: Array.isArray(parsed?.standardTreatments) ? parsed.standardTreatments : [],
+
+      holisticRootCause: parsed?.holisticRootCause || "",
+      holisticExplanation: parsed?.holisticExplanation || "",
+      holisticProtocols: Array.isArray(parsed?.holisticProtocols) ? parsed.holisticProtocols : [],
+
+      products: Array.isArray(parsed?.products) ? parsed.products : []
     };
 
     return safe;

@@ -1,19 +1,16 @@
 import React from "react";
-import { Activity, AlertTriangle, HelpCircle } from "lucide-react";
-import type { HealthResponse } from "../types";
-
-type StandardData = HealthResponse["standard"];
+import { Activity } from "lucide-react";
+import type { RecommendationResponse } from "../types";
 
 interface MedicalCardProps {
-  data: StandardData;
+  data: RecommendationResponse;
 }
 
 export const MedicalCard: React.FC<MedicalCardProps> = ({ data }) => {
   const {
-    diagnosis = "",
-    rationale = "",
-    redFlags = [],
-    whatToAskDoctor = [],
+    standardDiagnosis = "",
+    standardExplanation = "",
+    standardTreatments = [],
   } = data || {};
 
   return (
@@ -33,70 +30,43 @@ export const MedicalCard: React.FC<MedicalCardProps> = ({ data }) => {
       </header>
 
       {/* Diagnosis */}
-      {diagnosis && (
+      {standardDiagnosis && (
         <section className="mb-4">
           <h3 className="text-xs font-semibold tracking-wide text-slate-700 uppercase mb-1.5">
             Typical Diagnosis
           </h3>
           <p className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-800">
-            {diagnosis}
+            {standardDiagnosis}
           </p>
         </section>
       )}
 
-      {/* Rationale / explanation */}
-      {rationale && (
+      {/* Explanation */}
+      {standardExplanation && (
         <section className="mb-4">
           <h3 className="text-xs font-semibold tracking-wide text-slate-700 uppercase mb-1.5">
             Explanation
           </h3>
-          <p className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm leading-relaxed text-slate-800">
-            {rationale}
+          <p className="text-sm text-slate-700 leading-relaxed">
+            {standardExplanation}
           </p>
         </section>
       )}
 
-      {/* Red flags */}
-      {redFlags && redFlags.length > 0 && (
-        <section className="mb-4">
-          <div className="flex items-center gap-2 mb-1.5">
-            <AlertTriangle className="h-4 w-4 text-red-500" />
-            <h3 className="text-xs font-semibold tracking-wide text-red-700 uppercase">
-              Warning Signs
-            </h3>
-          </div>
-          <ul className="rounded-2xl border border-red-100 bg-red-50/80 px-4 py-3 space-y-1.5 text-xs text-red-900">
-            {redFlags.map((flag, idx) => (
-              <li key={idx} className="flex gap-1.5">
-                <span className="mt-1 inline-block h-1.5 w-1.5 flex-none rounded-full bg-red-400" />
-                <span>{flag}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* Questions for doctor */}
-      {whatToAskDoctor && whatToAskDoctor.length > 0 && (
+      {/* Standard Treatments */}
+      {standardTreatments && standardTreatments.length > 0 && (
         <section>
-          <div className="flex items-center gap-2 mb-1.5">
-            <HelpCircle className="h-4 w-4 text-slate-600" />
-            <h3 className="text-xs font-semibold tracking-wide text-slate-700 uppercase">
-              Questions for Your Doctor
-            </h3>
-          </div>
-          <ul className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 space-y-1.5 text-xs text-slate-800">
-            {whatToAskDoctor.map((q, idx) => (
-              <li key={idx} className="flex gap-1.5">
-                <span className="mt-1 inline-block h-1.5 w-1.5 flex-none rounded-full bg-slate-400" />
-                <span>{q}</span>
+          <h3 className="text-xs font-semibold tracking-wide text-slate-700 uppercase mb-2">
+            Standard Treatments
+          </h3>
+          <ul className="space-y-2">
+            {standardTreatments.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-2 text-sm text-slate-700">
+                <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-slate-400" />
+                <span>{item}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-[11px] text-slate-500">
-            *Always consult with a healthcare professional about your specific
-            situation.
-          </p>
         </section>
       )}
     </article>

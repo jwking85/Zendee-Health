@@ -1,5 +1,5 @@
 // services/openaiService.ts
-import type { HealthResponse, UserProfile } from "../types";
+import type { RecommendationResponse, UserProfile } from "../types";
 import { buildHealthPrompt } from "./healthPrompt";
 
 const openaiKey = import.meta.env.VITE_OPENAI_API_KEY;
@@ -8,7 +8,7 @@ const OPENAI_MODEL_ID = "gpt-4o-mini"; // or "gpt-4o"
 export const fetchHealthAdviceOpenAI = async (
   symptom: string,
   profile?: UserProfile | null
-): Promise<HealthResponse> => {
+): Promise<RecommendationResponse> => {
   if (!openaiKey) {
     console.error("VITE_OPENAI_API_KEY is missing");
     throw new Error("AI configuration missing");
@@ -43,29 +43,34 @@ export const fetchHealthAdviceOpenAI = async (
     }
 
     const data = await response.json();
-    const parsed = data?.choices?.[0]?.message?.content
-      ? JSON.parse(data.choices[0].message.content)
-      : null;
 
-    if (!parsed) {
-      throw new Error("Invalid response from OpenAI");
+    let parsed: RecommendationResponse;
+    try {
+      const content = data?.choices?.[0]?.message?.content;
+      if (!content) {
+        throw new Error("No content in OpenAI response");
+      }
+      parsed = JSON.parse(content);
+    } catch (e) {
+      console.error("Failed to parse OpenAI JSON:", data);
+      throw new Error("Invalid JSON from OpenAI");
     }
 
-    const safe: HealthResponse = {
-      standard: {
-        diagnosis:
-          parsed?.standard?.diagnosis ??
-          "No diagnosis summary is available yet.",
-        rationale: parsed?.standard?.rationale ?? "",
-        redFlags: parsed?.standard?.redFlags ?? [],
-        whatToAskDoctor: parsed?.standard?.whatToAskDoctor ?? []
-      },
-      holistic: {
-        protocols: parsed?.holistic?.protocols ?? [],
-        lifestyle: parsed?.holistic?.lifestyle ?? [],
-        supplements: parsed?.holistic?.supplements ?? [],
-        cautions: parsed?.holistic?.cautions ?? []
-      }
+    // Ensure all required fields are present with safe defaults
+    const safe: RecommendationResponse = {
+      symptom: parsed?.symptom || symptom,
+      summary: parsed?.summary || "",
+      disclaimer: parsed?.disclaimer || "This is general educational information, not medical advice. Consult a healthcare professional for personalized care.",
+
+      standardDiagnosis: parsed?.standardDiagnosis || "",
+      standardExplanation: parsed?.standardExplanation || "",
+      standardTreatments: Array.isArray(parsed?.standardTreatments) ? parsed.standardTreatments : [],
+
+      holisticRootCause: parsed?.holisticRootCause || "",
+      holisticExplanation: parsed?.holisticExplanation || "",
+      holisticProtocols: Array.isArray(parsed?.holisticProtocols) ? parsed.holisticProtocols : [],
+
+      products: Array.isArray(parsed?.products) ? parsed.products : []
     };
 
     return safe;
