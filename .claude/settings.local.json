@@ -11,7 +11,8 @@
       "Bash(cat:*)",
       "Bash(npm install:*)",
       "Bash(echo \"iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAPJJREFUWEdjZKAQMFKon4GB4T8DA8O3t7db0KJBBViNBgDGJCAcQwY0GhqGBhX8//8/GJgYGBgYzAIAtJgYGBgdExMjAwMDCw/B8sLKykuNjIyMjEwMDDwH5RsYGAgMDIyMjj679+/f4yMjAwODs7e8DQ0NDoxsbGxgjAwMDIykpCQ4Ojr+//8/AwPDLMIHGBgYGBheXl4GBwcnAODg4GBYWAYHBwcjAwODLwUjW2BgYDAwMDAwPDx8GBgYGBlYKCwtbAwMDDw8PDw8PDw//9+AcqeDAwMPA8Ghr9+/YfYGBgYGBIGBgYGJjAwMDAwMD5uWVgYGBgYGPh06dPnz69evYFoUga+NxjCjDwAAAABJRU5ErkJggg==\")",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(where:*)"
     ],
     "deny": [],
     "ask": []
