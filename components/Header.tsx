@@ -9,31 +9,21 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  const handleNavClick = () => {
-    setIsMobileOpen(false);
-  };
-
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md shadow-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
-        {/* Logo + brand */}
-        <a
-          href="/"
-          className="flex items-center gap-2"
-          onClick={handleNavClick}
-        >
+      <div className="relative mx-auto flex max-w-6xl items-center justify-center px-4 py-3 sm:py-4">
+
+        {/* LEFT: Logo */}
+        <a href="/" className="absolute left-4 top-1/2 -translate-y-1/2">
           <img
             src={RemedyClearLogo}
             alt="Remedy Clear"
-            className="h-9 w-auto sm:h-10"
+            className="h-12 w-auto sm:h-14 drop-shadow-sm"
           />
-          <span className="hidden text-sm font-semibold tracking-tight text-slate-900 sm:inline">
-            Remedy Clear
-          </span>
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 text-sm font-medium text-slate-700 sm:flex">
+        {/* CENTER: Navigation */}
+        <nav className="hidden gap-10 text-sm font-medium text-slate-800 sm:flex">
           <a
             href="/#remedyclear-tool"
             className="border-b-2 border-transparent pb-1 transition hover:border-teal-500 hover:text-teal-700"
@@ -48,16 +38,15 @@ export const Header: React.FC<HeaderProps> = () => {
           </a>
         </nav>
 
-        {/* Mobile menu button */}
+        {/* RIGHT: Mobile Menu Button */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md border border-slate-200 p-1.5 text-slate-700 shadow-sm sm:hidden"
+          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-md border border-slate-200 p-1.5 text-slate-700 shadow-sm sm:hidden"
           onClick={() => setIsMobileOpen((prev) => !prev)}
           aria-label="Toggle navigation"
         >
-          <span className="sr-only">Toggle navigation</span>
           <svg
-            className="h-5 w-5"
+            className="h-6 w-6"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -81,21 +70,21 @@ export const Header: React.FC<HeaderProps> = () => {
         </button>
       </div>
 
-      {/* Mobile nav dropdown */}
+      {/* Mobile Dropdown */}
       {isMobileOpen && (
         <div className="border-t border-slate-200 bg-white sm:hidden">
-          <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 text-sm font-medium text-slate-800">
+          <nav className="flex flex-col gap-1 px-4 py-3 text-sm font-medium text-slate-800">
             <a
               href="/#remedyclear-tool"
               className="rounded-md px-2 py-2 hover:bg-teal-50 hover:text-teal-700"
-              onClick={handleNavClick}
+              onClick={() => setIsMobileOpen(false)}
             >
               Compare Remedies
             </a>
             <a
               href="/joint-pain"
               className="rounded-md px-2 py-2 hover:bg-teal-50 hover:text-teal-700"
-              onClick={handleNavClick}
+              onClick={() => setIsMobileOpen(false)}
             >
               Guides
             </a>
