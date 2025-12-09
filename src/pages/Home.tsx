@@ -183,7 +183,7 @@ const Home: React.FC = () => {
                   <span className="text-brand-teal font-serif italic">Real relief.</span>
                 </h1>
                 <p className="mt-4 text-[16px] leading-relaxed text-slate-600 md:text-[18px]">
-                  Compare standard medicine with root-cause care—side by side.
+                  Compare standard medicine with root-cause care, side by side.
                 </p>
               </div>
 

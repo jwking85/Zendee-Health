@@ -32,7 +32,7 @@ const JointPainPage: React.FC = () => {
                   </span>
                 </a>
                 <p className="text-xs text-slate-500 sm:text-sm">
-                  Use the RemedyClear search tool and type{" "}
+                  Use the Remedy Clear search tool and type{" "}
                   <span className="font-semibold">"joint pain"</span> for a personalized
                   breakdown.
                 </p>
@@ -49,7 +49,7 @@ const JointPainPage: React.FC = () => {
                 offers deeper and longer-lasting comfort.
               </p>
               <p className="mt-3">
-                RemedyClear doesn't choose sides. We show you{" "}
+                Remedy Clear doesn't choose sides. We show you{" "}
                 <span className="font-semibold">both the medical and holistic view</span>{" "}
                 while gently encouraging a natural-first mindset built on lifestyle,
                 nutrition, and whole-body wellness.
@@ -354,16 +354,16 @@ const JointPainPage: React.FC = () => {
             className="rounded-3xl border border-teal-100 bg-gradient-to-r from-teal-50 via-white to-emerald-50 p-6 shadow-sm sm:p-7"
           >
             <h2 className="text-lg font-semibold text-slate-900 sm:text-xl">
-              See Your Options Side-by-Side with RemedyClear
+              See Your Options Side-by-Side with Remedy Clear
             </h2>
             <p className="mt-3 text-sm text-slate-700">
               Reading about joint pain is helpful, but it can still leave you wondering,
               "What should I actually try first?"
             </p>
             <p className="mt-2 text-sm text-slate-700">
-              The RemedyClear tool gives you a{" "}
+              The Remedy Clear tool gives you a{" "}
               <span className="font-semibold">custom side-by-side comparison</span> of
-              standard medical options and holistic, natural-first approaches—plus product
+              standard medical options and holistic, natural-first approaches, plus product
               ideas you can explore, all in one place.
             </p>
             <p className="mt-2 text-sm text-slate-700">
@@ -374,7 +374,7 @@ const JointPainPage: React.FC = () => {
               href="/#remedyclear-tool"
               className="mt-4 inline-flex items-center justify-center rounded-full bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
             >
-              Compare joint pain remedies with RemedyClear
+              Compare joint pain remedies with Remedy Clear
             </a>
           </section>
 
