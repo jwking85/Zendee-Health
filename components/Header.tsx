@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = () => {
           <img
             src={RemedyClearLogo}
             alt="Remedy Clear"
-            className="h-12 w-auto sm:h-14 drop-shadow-sm"
+            className="h-16 w-auto sm:h-20 drop-shadow-sm"
           />
         </a>
 
