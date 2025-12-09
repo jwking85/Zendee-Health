@@ -7,6 +7,7 @@ import PrivacyPolicy from './src/pages/PrivacyPolicy';
 import TermsOfUse from './src/pages/TermsOfUse';
 import About from './src/pages/About';
 import Contact from './src/pages/Contact';
+import JointPainPage from './src/pages/JointPainPage';
 
 // Components
 import { Header } from './components/Header';
@@ -22,6 +23,7 @@ const App: React.FC = () => {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/joint-pain" element={<JointPainPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/about" element={<About />} />
