@@ -253,6 +253,30 @@ const Home: React.FC = () => {
                 </div>
               </div>
 
+              {/* Popular guides */}
+              <section
+                aria-label="Popular symptom guides"
+                className="mt-4 flex justify-center"
+              >
+                <div className="inline-flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-600">
+                  <span className="font-semibold text-slate-700">
+                    Popular guides:
+                  </span>
+
+                  <a
+                    href="/joint-pain"
+                    className="rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-xs font-medium text-teal-700 hover:border-teal-200 hover:bg-teal-100 transition-colors"
+                  >
+                    Joint Pain
+                  </a>
+
+                  {/* Add more later, e.g. */}
+                  {/* <span className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-500">
+                    Sore Throat (coming soon)
+                  </span> */}
+                </div>
+              </section>
+
               {/* Testimonial Ticker */}
               {!data && !isLoading && (
                 <div className="mt-8">

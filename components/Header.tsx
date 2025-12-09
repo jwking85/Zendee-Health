@@ -23,9 +23,20 @@ export const Header: React.FC<HeaderProps> = ({ isPro, onToggle }) => {
           />
         </div>
 
-        {/* TEMP: hide the Standard / Pro Wellness toggle for now */}
-        {/* We'll reuse isPro later for real Pro features */}
-        {/* <Toggle isPro={isPro} onToggle={onToggle} /> */}
+        <nav className="flex items-center gap-6 text-sm font-medium text-slate-700">
+          <a
+            href="/#remedyclear-tool"
+            className="hover:text-teal-600 transition-colors"
+          >
+            Tool
+          </a>
+          <a
+            href="/joint-pain"
+            className="hover:text-teal-600 transition-colors"
+          >
+            Symptoms
+          </a>
+        </nav>
       </div>
     </header>
   );
