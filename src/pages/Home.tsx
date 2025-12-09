@@ -183,7 +183,7 @@ const Home: React.FC = () => {
                   <span className="text-brand-teal font-serif italic">Real relief.</span>
                 </h1>
                 <p className="mt-4 text-[16px] leading-relaxed text-slate-600 md:text-[18px]">
-                  Compare standard medicine with root-cause care, side by side.
+                  Compare standard medical care with natural, root-cause approaches — clearly and side by side.
                 </p>
               </div>
 
@@ -199,7 +199,7 @@ const Home: React.FC = () => {
                       <input
                         type="text"
                         className="block w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder-slate-400 shadow-sm transition focus:border-emerald-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-400/10 md:py-4 md:text-[17px]"
-                        placeholder="e.g., constant heartburn, fatty liver, chronic headaches"
+                        placeholder="e.g., chronic headaches, acid reflux, joint pain"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         disabled={isLoading}
@@ -288,16 +288,36 @@ const Home: React.FC = () => {
         </section>
 
         <section className="py-10 bg-white">
-          <div className="mx-auto max-w-2xl px-4 text-center">
-            <h2 className="text-lg font-semibold text-slate-800 mb-2">
-              How this tool works
+          <div className="mx-auto max-w-3xl px-4">
+            <h2 className="text-xl font-semibold text-slate-800 mb-4 text-center">
+              How Remedy Clear Works
             </h2>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              This tool compares standard medical guidance with natural wellness insights
-              so you can understand both perspectives more clearly.
+            <p className="text-slate-600 text-sm leading-relaxed text-center mb-6">
+              Most health information gives you either a medical explanation or a natural approach — but rarely both. Remedy Clear brings those two worlds together.
             </p>
-            <p className="mt-2 text-[12px] text-slate-400 italic">
-              For educational use only.
+
+            <div className="grid gap-6 md:grid-cols-3 text-sm">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 text-teal-700 font-bold mb-3">1</div>
+                <h3 className="font-semibold text-slate-800 mb-2">You enter a symptom</h3>
+                <p className="text-slate-600 leading-relaxed">Our system analyzes it using medical research and holistic, whole-body principles.</p>
+              </div>
+
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 text-teal-700 font-bold mb-3">2</div>
+                <h3 className="font-semibold text-slate-800 mb-2">We show you two clear paths</h3>
+                <p className="text-slate-600 leading-relaxed">One reflects conventional medical care. The other highlights natural, root-cause options.</p>
+              </div>
+
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 text-teal-700 font-bold mb-3">3</div>
+                <h3 className="font-semibold text-slate-800 mb-2">You choose what fits you</h3>
+                <p className="text-slate-600 leading-relaxed">We help you understand the "why" behind each approach so you can make informed decisions.</p>
+              </div>
+            </div>
+
+            <p className="mt-8 text-xs text-slate-500 italic text-center">
+              Remedy Clear is an educational tool and does not replace professional medical advice. Always talk with a qualified healthcare provider about any symptoms or changes to your health.
             </p>
           </div>
         </section>
