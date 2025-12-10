@@ -38,8 +38,14 @@ export const Footer: React.FC = () => {
             Terms of Use
           </Link>
         </div>
-        <div className="mt-8 text-xs text-gray-300">
-          © {new Date().getFullYear()} Remedy Clear
+        <div className="mt-8 space-y-2 text-xs text-gray-400">
+          <p>
+            Remedy Clear participates in the Amazon Services LLC Associates Program.
+            As an Amazon Associate, we earn from qualifying purchases at no extra cost to you.
+          </p>
+          <p className="text-gray-300">
+            © {new Date().getFullYear()} Remedy Clear
+          </p>
         </div>
       </div>
     </footer>

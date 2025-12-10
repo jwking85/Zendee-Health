@@ -36,7 +36,8 @@ export const GUIDES: Record<string, GuideData> = {
           name: 'Turmeric (Curcumin)',
           description: 'A powerful anti-inflammatory compound. Many people take turmeric supplements with black pepper (which helps absorption) to reduce joint pain naturally.',
           amazonFriendly: true,
-          amazonQuery: 'turmeric curcumin black pepper supplement'
+          amazonQuery: 'turmeric curcumin black pepper supplement',
+          isTopPick: true
         },
         {
           name: 'Omega-3 Fatty Acids',
@@ -193,7 +194,8 @@ export const GUIDES: Record<string, GuideData> = {
           name: 'Magnesium',
           description: 'Known as the "relaxation mineral." Many people with anxiety are deficient. Magnesium glycinate is a well-absorbed form.',
           amazonFriendly: true,
-          amazonQuery: 'magnesium glycinate supplement relaxation'
+          amazonQuery: 'magnesium glycinate supplement relaxation',
+          isTopPick: true
         },
         {
           name: 'Ashwagandha',
@@ -272,7 +274,8 @@ export const GUIDES: Record<string, GuideData> = {
           name: 'Magnesium Glycinate',
           description: 'Taken before bed, magnesium helps relax the nervous system and muscles, promoting deeper sleep.',
           amazonFriendly: true,
-          amazonQuery: 'magnesium glycinate sleep supplement'
+          amazonQuery: 'magnesium glycinate sleep supplement',
+          isTopPick: true
         },
         {
           name: 'Melatonin',
@@ -430,7 +433,8 @@ export const GUIDES: Record<string, GuideData> = {
           name: 'Digestive Enzymes',
           description: 'Supplements with enzymes like amylase, lipase, and protease help break down food properly and reduce bloating.',
           amazonFriendly: true,
-          amazonQuery: 'digestive enzymes bloating gas relief'
+          amazonQuery: 'digestive enzymes bloating gas relief',
+          isTopPick: true
         },
         {
           name: 'Ginger',
@@ -588,7 +592,8 @@ export const GUIDES: Record<string, GuideData> = {
           name: 'Magnesium',
           description: 'Relaxes blood vessels and helps regulate blood pressure. Many people with hypertension are deficient.',
           amazonFriendly: true,
-          amazonQuery: 'magnesium supplement blood pressure support'
+          amazonQuery: 'magnesium supplement blood pressure support',
+          isTopPick: true
         },
         {
           name: 'Potassium',
@@ -668,7 +673,8 @@ export const GUIDES: Record<string, GuideData> = {
           name: 'Milk Thistle',
           description: 'An herb that supports liver health and has been used for centuries to protect liver cells.',
           amazonFriendly: true,
-          amazonQuery: 'milk thistle extract silymarin liver support'
+          amazonQuery: 'milk thistle extract silymarin liver support',
+          isTopPick: true
         },
         {
           name: 'Berberine',

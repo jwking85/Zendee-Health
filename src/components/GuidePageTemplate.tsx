@@ -22,6 +22,7 @@ export interface GuideData {
       description: string;
       amazonFriendly?: boolean;
       amazonQuery?: string;
+      isTopPick?: boolean;
     }>;
   };
   medicalOptions: GuideSection;
@@ -130,19 +131,30 @@ export const GuidePageTemplate: React.FC<GuidePageTemplateProps> = ({ data }) =>
                 key={idx}
                 className="rounded-xl border border-white bg-white/80 p-4 shadow-sm backdrop-blur-sm"
               >
-                <h3 className="mb-2 font-bold text-slate-900">
-                  {item.name}
+                <div className="mb-2 flex items-center gap-2 flex-wrap">
+                  <h3 className="font-bold text-slate-900">
+                    {item.name}
+                  </h3>
+                  {item.isTopPick && (
+                    <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
+                      ⭐ Top Pick
+                    </span>
+                  )}
                   {item.amazonFriendly && (
-                    <span className="ml-2 inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">
+                    <span className="inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">
                       Widely Available
                     </span>
                   )}
-                </h3>
+                </div>
                 <p className="text-sm leading-relaxed text-slate-600">
                   {item.description}
                 </p>
                 {item.amazonQuery && (
-                  <AmazonLink query={item.amazonQuery} />
+                  <AmazonLink
+                    query={item.amazonQuery}
+                    guideSlug={data.slug}
+                    productName={item.name}
+                  />
                 )}
               </div>
             ))}
