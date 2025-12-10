@@ -5,7 +5,7 @@ interface AmazonLinkProps {
   tag?: string;
 }
 
-export const AmazonLink: React.FC<AmazonLinkProps> = ({ query, tag = 'YOURTAG-20' }) => (
+export const AmazonLink: React.FC<AmazonLinkProps> = ({ query, tag = 'remedyclear-20' }) => (
   <a
     href={`https://www.amazon.com/s?k=${encodeURIComponent(query)}&tag=${tag}`}
     target="_blank"
