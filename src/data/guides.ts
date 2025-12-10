@@ -113,22 +113,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Apple Cider Vinegar',
           description: 'A tablespoon diluted in water before meals can help increase stomach acid and improve digestion for some people.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'organic apple cider vinegar with mother'
         },
         {
           name: 'Digestive Enzymes',
           description: 'Supplements containing enzymes like pepsin and betaine HCl can support proper breakdown of food and reduce reflux.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'digestive enzymes supplement acid reflux'
         },
         {
           name: 'Probiotics',
           description: 'Healthy gut bacteria support digestion and can reduce symptoms of reflux by improving overall gut function.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'probiotic for gut health acid reflux'
         },
         {
           name: 'Ginger',
           description: 'A natural digestive aid that can soothe the stomach and reduce inflammation in the esophagus.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'ginger capsules digestion nausea'
         },
         {
           name: 'Dietary Changes',
@@ -188,22 +192,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Magnesium',
           description: 'Known as the "relaxation mineral." Many people with anxiety are deficient. Magnesium glycinate is a well-absorbed form.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'magnesium glycinate supplement relaxation'
         },
         {
           name: 'Ashwagandha',
           description: 'An adaptogenic herb that helps the body manage stress and has been shown to reduce anxiety in studies.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'ashwagandha root extract stress relief'
         },
         {
           name: 'L-Theanine',
           description: 'An amino acid found in green tea that promotes relaxation without drowsiness. Often taken as a supplement.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'l theanine capsules calm focus'
         },
         {
           name: 'B-Complex Vitamins',
           description: 'Essential for nervous system health and neurotransmitter production. Deficiencies can worsen anxiety.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'vitamin b complex stress support'
         },
         {
           name: 'Breathwork & Meditation',
@@ -263,22 +271,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Magnesium Glycinate',
           description: 'Taken before bed, magnesium helps relax the nervous system and muscles, promoting deeper sleep.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'magnesium glycinate sleep supplement'
         },
         {
           name: 'Melatonin',
           description: 'A natural sleep hormone. Low doses (0.5-3mg) can help reset your circadian rhythm without grogginess.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'melatonin 1mg 3mg sleep aid'
         },
         {
           name: 'L-Theanine',
           description: 'Promotes relaxation and can improve sleep quality by calming the mind without sedation.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'l theanine sleep support capsules'
         },
         {
           name: 'Chamomile or Passionflower Tea',
           description: 'Gentle herbs that support relaxation and have been used for centuries to promote sleep.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'chamomile passionflower bedtime tea'
         },
         {
           name: 'Sleep Hygiene',
@@ -338,22 +350,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Magnesium Citrate',
           description: 'A natural osmotic laxative that draws water into the intestines and promotes bowel movements. Gentler than stimulant laxatives.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'magnesium citrate gentle laxative'
         },
         {
           name: 'Psyllium Husk',
           description: 'A soluble fiber that adds bulk to stool and helps it move through the digestive tract. Mix with plenty of water.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'psyllium husk fiber powder'
         },
         {
           name: 'Probiotics',
           description: 'Healthy gut bacteria support regular bowel movements. Look for strains like Bifidobacterium and Lactobacillus.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'probiotic for constipation relief'
         },
         {
           name: 'Chia Seeds or Flaxseeds',
           description: 'High in fiber and omega-3s. Soak in water before consuming to create a gel that helps move waste through.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'organic ground flaxseed chia mix'
         },
         {
           name: 'Hydration',
@@ -413,22 +429,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Digestive Enzymes',
           description: 'Supplements with enzymes like amylase, lipase, and protease help break down food properly and reduce bloating.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'digestive enzymes bloating gas relief'
         },
         {
           name: 'Ginger',
           description: 'A natural digestive aid that reduces inflammation and helps move food through the digestive tract.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'ginger root capsules digestion bloating'
         },
         {
           name: 'Peppermint Oil',
           description: 'Relaxes the muscles of the GI tract and can reduce bloating and gas. Often taken in enteric-coated capsules.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'peppermint oil enteric coated capsules'
         },
         {
           name: 'Probiotics',
           description: 'Healthy gut bacteria help break down food and reduce fermentation that causes gas and bloating.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'probiotic for bloating gas relief'
         },
         {
           name: 'Food Elimination',
@@ -488,22 +508,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Magnesium',
           description: 'Studies show magnesium deficiency is common in migraine sufferers. Magnesium glycinate or threonate are well-absorbed forms.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'magnesium glycinate migraine headache'
         },
         {
           name: 'Riboflavin (Vitamin B2)',
           description: 'High doses (400mg daily) have been shown to reduce migraine frequency in studies.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'riboflavin vitamin b2 400mg migraine'
         },
         {
           name: 'Feverfew',
           description: 'An herb traditionally used for migraines. Some studies show it can reduce frequency and severity.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'feverfew extract migraine prevention'
         },
         {
           name: 'Peppermint or Lavender Oil',
           description: 'Applied topically to temples or inhaled. Both have calming, pain-relieving properties.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'peppermint lavender essential oil headache'
         },
         {
           name: 'Hydration',
@@ -563,22 +587,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Magnesium',
           description: 'Relaxes blood vessels and helps regulate blood pressure. Many people with hypertension are deficient.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'magnesium supplement blood pressure support'
         },
         {
           name: 'Potassium',
           description: 'Balances sodium and supports healthy blood pressure. Found in leafy greens, avocados, and supplements.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'potassium citrate supplement 99mg'
         },
         {
           name: 'Omega-3 Fatty Acids',
           description: 'Reduce inflammation and have been shown to lower blood pressure in studies.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'omega 3 fish oil blood pressure heart'
         },
         {
           name: 'CoQ10',
           description: 'An antioxidant that supports heart health and may help lower blood pressure naturally.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'coq10 ubiquinol heart health 200mg'
         },
         {
           name: 'Diet Changes',
@@ -639,22 +667,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Milk Thistle',
           description: 'An herb that supports liver health and has been used for centuries to protect liver cells.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'milk thistle extract silymarin liver support'
         },
         {
           name: 'Berberine',
           description: 'A compound that improves insulin sensitivity and has been shown to reduce liver fat in studies.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'berberine supplement 500mg blood sugar'
         },
         {
           name: 'N-Acetyl Cysteine (NAC)',
           description: 'A powerful antioxidant that supports liver detoxification and may help reduce liver inflammation.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'nac n acetyl cysteine 600mg liver'
         },
         {
           name: 'Omega-3 Fatty Acids',
           description: 'Reduce liver inflammation and have been shown to decrease liver fat content.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'omega 3 fish oil liver health inflammation'
         },
         {
           name: 'Low-Carb Diet',
@@ -714,22 +746,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Maca Root',
           description: 'An adaptogenic herb that supports hormone balance and energy, especially during menopause or perimenopause.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'maca root powder organic hormone balance'
         },
         {
           name: 'DIM (Diindolylmethane)',
           description: 'Helps metabolize estrogen properly, supporting healthy estrogen balance. Found in cruciferous vegetables or supplements.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'dim supplement estrogen metabolism 200mg'
         },
         {
           name: 'Magnesium',
           description: 'Supports progesterone production and helps balance cortisol, especially important for stress-related hormone issues.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'magnesium glycinate hormone balance stress'
         },
         {
           name: 'Omega-3 Fatty Acids',
           description: 'Reduce inflammation and provide building blocks for hormone production.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'omega 3 fish oil hormone support women'
         },
         {
           name: 'Blood Sugar Balance',
