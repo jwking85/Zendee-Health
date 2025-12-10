@@ -10,6 +10,7 @@ import Contact from './src/pages/Contact';
 import JointPainPage from './src/pages/JointPainPage';
 
 // Health Guides
+import GuidesIndex from './src/pages/guides/index';
 import JointPainGuide from './src/pages/guides/JointPainGuide';
 import AcidRefluxGuide from './src/pages/guides/AcidRefluxGuide';
 import AnxietyGuide from './src/pages/guides/AnxietyGuide';
@@ -37,6 +38,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
 
           {/* Health Guides */}
+          <Route path="/guides" element={<GuidesIndex />} />
           <Route path="/guides/joint-pain" element={<JointPainGuide />} />
           <Route path="/guides/acid-reflux" element={<AcidRefluxGuide />} />
           <Route path="/guides/anxiety" element={<AnxietyGuide />} />

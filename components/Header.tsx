@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = () => {
             Compare Remedies
           </a>
           <a
-            href="/guides/joint-pain"
+            href="/guides"
             className="border-b-2 border-transparent pb-1 transition hover:border-teal-500 hover:text-teal-700"
           >
             Guides
@@ -82,7 +82,7 @@ export const Header: React.FC<HeaderProps> = () => {
               Compare Remedies
             </a>
             <a
-              href="/guides/joint-pain"
+              href="/guides"
               className="rounded-md px-2 py-2 hover:bg-teal-50 hover:text-teal-700"
               onClick={() => setIsMobileOpen(false)}
             >
