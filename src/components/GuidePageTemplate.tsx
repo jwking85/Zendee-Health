@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { AmazonLink } from './AmazonLink';
 
 export interface GuideSection {
   title: string;
@@ -20,6 +21,7 @@ export interface GuideData {
       name: string;
       description: string;
       amazonFriendly?: boolean;
+      amazonQuery?: string;
     }>;
   };
   medicalOptions: GuideSection;
@@ -139,6 +141,9 @@ export const GuidePageTemplate: React.FC<GuidePageTemplateProps> = ({ data }) =>
                 <p className="text-sm leading-relaxed text-slate-600">
                   {item.description}
                 </p>
+                {item.amazonQuery && (
+                  <AmazonLink query={item.amazonQuery} />
+                )}
               </div>
             ))}
           </div>

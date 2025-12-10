@@ -35,22 +35,26 @@ export const GUIDES: Record<string, GuideData> = {
         {
           name: 'Turmeric (Curcumin)',
           description: 'A powerful anti-inflammatory compound. Many people take turmeric supplements with black pepper (which helps absorption) to reduce joint pain naturally.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'turmeric curcumin black pepper supplement'
         },
         {
           name: 'Omega-3 Fatty Acids',
           description: 'Found in fish oil or algae oil. Omega-3s help lower inflammation throughout the body, including in joints.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'omega 3 fish oil high EPA DHA'
         },
         {
           name: 'Bone Broth',
           description: 'Rich in collagen and amino acids like glycine and proline, which support joint health and reduce inflammation.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'bone broth powder grass fed'
         },
         {
           name: 'Magnesium',
           description: 'Supports muscle relaxation and can ease tension around painful joints. Found in leafy greens, nuts, and supplements.',
-          amazonFriendly: true
+          amazonFriendly: true,
+          amazonQuery: 'magnesium glycinate supplement'
         },
         {
           name: 'Anti-Inflammatory Diet',
