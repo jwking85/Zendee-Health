@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(node -c:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd complete symptom page system with 10 symptom guides\n\nNew Symptom System:\n- Created symptoms.ts data config with 10 complete symptom guides\n- Built dynamic SymptomPage component using slug-based routing\n- Added /symptoms/:slug route to App.tsx\n\n10 Symptom Pages Include:\n1. Sharp Left Side Stomach Pain\n2. Constant Head Pressure (No Pain)\n3. Tired All The Time\n4. Chest Burning After Eating\n5. Morning Stiff Joints\n6. Lower Back Pain On And Off\n7. Bloating After Every Meal\n8. Throat Tightness / Lump Feeling\n9. Shortness of Breath After Eating\n10. Dizzy When Standing Up\n\nEach Symptom Guide Features:\n- SEO-optimized title and hero tagline\n- Overview and \"what it might mean\" context\n- Common causes doctors look for\n- Red flag warnings with emergency guidance\n- Natural relief options (4+ products each with Amazon queries)\n- Medical evaluation approaches\n- Cross-links to related health guides\n- CTA to comparison tool\n\nTechnical Implementation:\n- Uses existing AmazonLink component with GA4 tracking\n- Matches site gradient design and responsive patterns\n- Clean 404 handling for invalid symptom slugs\n- Amazon affiliate tracking via guideSlug=\"symptom-{slug}\"\n- Alert icons (AlertTriangle, Leaf, Stethoscope) for visual hierarchy\n\nAmazon Monetization:\n- 40+ additional Amazon affiliate product links\n- All queries optimized for search intent\n- Uses remedyclear-20 tag for commission tracking\n\nThis creates a scalable symptom library to capture long-tail search traffic and guide users to the main comparison tool.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []

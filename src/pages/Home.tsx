@@ -14,6 +14,7 @@ import { TestimonialTicker } from '../../components/TestimonialTicker';
 import { ShareCard } from '../../components/ShareCard';
 import { ProfilePrompt } from '../../components/ProfilePrompt';
 import { FeedbackPrompt } from '../../components/FeedbackPrompt';
+import { SearchAutocomplete } from '../../components/SearchAutocomplete';
 import { Users } from 'lucide-react';
 
 const Home: React.FC = () => {
@@ -196,13 +197,11 @@ const Home: React.FC = () => {
                         What are you experiencing?
                       </label>
 
-                      <input
-                        type="text"
-                        className="block w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder-slate-400 shadow-sm transition focus:border-emerald-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-400/10 md:py-4 md:text-[17px]"
-                        placeholder="e.g., chronic headaches, acid reflux, joint pain"
+                      <SearchAutocomplete
                         value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        disabled={isLoading}
+                        onChange={setQuery}
+                        onSubmit={handleSearch}
+                        placeholder="e.g., chronic headaches, acid reflux, joint pain"
                       />
 
                       <button
