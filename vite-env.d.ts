@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_GEMINI_API_KEY: string;
+  // No sensitive keys should be exposed to the client
 }
 
 interface ImportMeta {
