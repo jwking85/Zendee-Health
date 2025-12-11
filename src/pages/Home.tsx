@@ -14,7 +14,7 @@ import { TestimonialTicker } from '../../components/TestimonialTicker';
 import { ShareCard } from '../../components/ShareCard';
 import { ProfilePrompt } from '../../components/ProfilePrompt';
 import { FeedbackPrompt } from '../../components/FeedbackPrompt';
-import { SearchAutocomplete } from '../../components/SearchAutocomplete';
+import { SearchAutocomplete } from '../components/SearchAutocomplete';
 import { Users } from 'lucide-react';
 
 const Home: React.FC = () => {
