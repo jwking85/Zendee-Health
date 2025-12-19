@@ -3,7 +3,7 @@ import { getHealthAdvice } from '../../services/aiRouter';
 import { getUserProfile, saveUserProfile, saveFeedback, addToHistory, getHistory } from '../../services/storageService';
 import { EMERGENCY_KEYWORDS, SAMPLE_QUERIES } from '../../constants';
 import { RecommendationResponse, UserProfile } from '../../types';
-import { trackEvent } from '../lib/analytics';
+import { trackEvent, track } from '../lib/analytics';
 
 // Components
 import { EmergencyWarning } from '../../components/EmergencyWarning';
@@ -60,9 +60,16 @@ const Home: React.FC = () => {
     return () => clearTimeout(timer);
   }, [query]);
 
-  const performSearch = async (searchTerm: string) => {
+  const performSearch = async (searchTerm: string, isAutocomplete = false) => {
     if (!searchTerm.trim()) return;
     if (checkEmergency(searchTerm)) return;
+
+    // Track search submission
+    track('rc_search_submitted', {
+      query: searchTerm,
+      source: 'home_search',
+      is_autocomplete: isAutocomplete,
+    });
 
     // Check if we should prompt for profile before first search
     if (!userProfile && !sessionStorage.getItem('profile_skipped')) {
@@ -103,6 +110,14 @@ const Home: React.FC = () => {
         symptom: searchTerm,
       });
 
+      // Track results viewed with detailed info
+      track('rc_results_viewed', {
+        query: searchTerm,
+        has_medical: !!(result.standardDiagnosis || result.standardTreatments?.length),
+        has_holistic: !!(result.holisticRootCause || result.holisticProtocols?.length),
+        products_count: result.products?.length || 0,
+      });
+
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
@@ -137,7 +152,7 @@ const Home: React.FC = () => {
 
   const handleQuickSelect = (q: string) => {
     setQuery(q);
-    performSearch(q);
+    performSearch(q, true); // Mark as autocomplete/quick select
   };
 
   const handleFeedback = (response: string) => {

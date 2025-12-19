@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertTriangle } from 'lucide-react';
+import { track } from '../src/lib/analytics';
 
 interface ClearStartingPathSummaryProps {
   symptom: string;
@@ -10,7 +11,13 @@ export const ClearStartingPathSummary: React.FC<ClearStartingPathSummaryProps> =
   symptom,
   keyDifference,
 }) => {
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id: string, target: 'medical' | 'holistic' | 'shopping') => {
+    // Track jump button click
+    track('rc_jump_clicked', {
+      query: symptom,
+      target,
+    });
+
     document.querySelector(`#${id}`)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -101,21 +108,21 @@ export const ClearStartingPathSummary: React.FC<ClearStartingPathSummaryProps> =
         <div className="flex flex-wrap gap-3">
           <button
             type="button"
-            onClick={() => scrollToSection('medical-view')}
+            onClick={() => scrollToSection('medical-view', 'medical')}
             className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors"
           >
             Medical view
           </button>
           <button
             type="button"
-            onClick={() => scrollToSection('holistic-view')}
+            onClick={() => scrollToSection('holistic-view', 'holistic')}
             className="inline-flex items-center rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100 hover:border-emerald-300 transition-colors"
           >
             Holistic view
           </button>
           <button
             type="button"
-            onClick={() => scrollToSection('shopping-list')}
+            onClick={() => scrollToSection('shopping-list', 'shopping')}
             className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors"
           >
             Shopping list

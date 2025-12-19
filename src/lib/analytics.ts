@@ -213,3 +213,20 @@ export const setUserProperties = (properties: Record<string, any>): void => {
 export const isAnalyticsReady = (): boolean => {
   return isInitialized && !!window.gtag;
 };
+
+/**
+ * Lightweight tracking helper for Remedy Clear events
+ * Safe wrapper that no-ops if analytics isn't available
+ *
+ * @param eventName - Event name (e.g., "rc_search_submitted")
+ * @param params - Optional event parameters
+ */
+export const track = (eventName: string, params?: Record<string, any>): void => {
+  // Safe no-op if gtag not available
+  if (typeof window === 'undefined' || !window.gtag) {
+    return;
+  }
+
+  // Use existing trackEvent function
+  trackEvent(eventName, params);
+};

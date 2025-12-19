@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import type { RecommendationResponse } from "../types";
 import { resolveAffiliateUrl } from "../src/lib/affiliate";
+import { track } from "../src/lib/analytics";
 
 interface HolisticCardProps {
   data: RecommendationResponse;
@@ -19,6 +20,16 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro: _isPro 
     holisticProtocols = [],
     products = [],
   } = data || {};
+
+  const handleAffiliateClick = (product: any, href: string) => {
+    track('rc_affiliate_click', {
+      query: data.symptom || '',
+      product_name: product.name,
+      recommended_for: product.recommendedFor || 'unknown',
+      destination: 'amazon',
+      href,
+    });
+  };
 
   return (
     <article
@@ -117,6 +128,7 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro: _isPro 
                           href={href}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() => handleAffiliateClick(product, href)}
                           className="flex-1 text-emerald-800 hover:text-emerald-900 hover:underline underline-offset-2"
                         >
                           {product.name}
