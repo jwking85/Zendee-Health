@@ -97,6 +97,9 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data }) => {
         {/* Products shopping list */}
         {products && products.length > 0 && (
           <section id="shopping-list" className="mt-4 rounded-xl border border-emerald-100 bg-emerald-50/70 px-3 py-2.5">
+            <p className="text-xs text-slate-600 mb-3 leading-relaxed">
+              Some people explore these options as part of learning more. This is not a recommendation.
+            </p>
             <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-emerald-800 mb-2">
               <ShoppingCart className="h-3.5 w-3.5" />
               Shopping list (inspired by the holistic view)

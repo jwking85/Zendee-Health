@@ -25,7 +25,7 @@ export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, isPro, res
       />
 
       <h2 className="text-center text-2xl font-semibold text-slate-900">
-        Your Comparison Results
+        Understanding the two perspectives
       </h2>
 
       {/* Display summary and disclaimer from AI */}

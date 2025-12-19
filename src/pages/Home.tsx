@@ -368,10 +368,14 @@ const Home: React.FC = () => {
         {/* Results */}
         {data && !isLoading && (
           <div className="animate-fade-in">
-             <div className="flex items-center justify-center gap-2 mb-6 text-sm text-gray-400 font-medium animate-slide-up">
+             <div className="flex items-center justify-center gap-2 mb-2 text-sm text-gray-400 font-medium animate-slide-up">
                 <Users className="w-4 h-4" />
                 {resultCount} people looked this up this week
              </div>
+
+             <p className="text-center text-sm text-slate-600 mb-6">
+               This page is meant to help you think more clearly, not tell you what to do.
+             </p>
 
              <ResultsSection
               data={data}
