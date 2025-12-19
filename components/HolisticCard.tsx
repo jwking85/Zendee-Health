@@ -12,7 +12,7 @@ interface HolisticCardProps {
   isPro: boolean; // kept for future features, not gating anything now
 }
 
-export const HolisticCard: React.FC<HolisticCardProps> = ({ data }) => {
+export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro: _isPro }) => {
   const {
     holisticRootCause = "",
     holisticExplanation = "",
@@ -105,12 +105,12 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data }) => {
               Shopping list (inspired by the holistic view)
             </div>
             <ul className="space-y-2 text-xs text-slate-700">
-              {products
-                .sort((a, b) => a.priority - b.priority)
+              {[...products]
+                .sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999))
                 .map((product) => {
                   const href = resolveAffiliateUrl(product.amazonSearchQuery || product.name);
                   return (
-                    <li key={product.id} className="flex flex-col gap-1">
+                    <li key={product.id ?? product.name} className="flex flex-col gap-1">
                       <div className="flex items-center gap-2">
                         <span className="inline-block h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
                         <a
