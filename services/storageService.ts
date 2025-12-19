@@ -23,7 +23,8 @@ export const addToHistory = (query: string) => {
   if (!isBrowser) return;
   try {
     const history = getHistory();
-    const newHistory = [query, ...history.filter(h => h !== query)].slice(0, 5);
+    // Case-insensitive deduplication: remove any existing entries that match (ignoring case)
+    const newHistory = [query, ...history.filter(h => h.toLowerCase() !== query.toLowerCase())].slice(0, 5);
     localStorage.setItem(KEYS.HISTORY, JSON.stringify(newHistory));
   } catch {
     // fail silently on storage errors

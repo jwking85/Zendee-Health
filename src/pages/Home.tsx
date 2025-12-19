@@ -308,47 +308,50 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        <section className="py-16 md:py-24 bg-white">
-          <div className="mx-auto max-w-3xl px-6">
-            <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 mb-8 text-center">
-              How Remedy Clear Helps
-            </h2>
-
-            <div className="space-y-6 text-base md:text-lg leading-relaxed text-slate-700 max-w-2xl mx-auto">
-              <p>
-                Most health searches create more confusion than clarity. One article says your symptom is serious. Another says it's nothing. Some recommend natural remedies. Others insist you need medication. You're left wondering what's true and what to do.
-              </p>
-
-              <p>
-                Remedy Clear shows you what standard medicine looks at and what holistic practitioners consider—side by side, without bias. You'll see common medical explanations, typical treatments, root-cause perspectives, and natural approaches people try. This isn't medical advice. It's a way to organize the information you're already trying to make sense of.
-              </p>
-
-              <p>
-                When you understand both viewpoints, you can think more clearly about what feels right for you.
-              </p>
-            </div>
-
-            <div className="mt-16 pt-12 border-t border-slate-200">
-              <h3 className="text-xl md:text-2xl font-semibold text-slate-900 mb-6 text-center">
-                Balance Between Medical and Holistic Perspectives
-              </h3>
+        {/* Hide homepage explainer sections once results exist */}
+        {!data && (
+          <section className="py-16 md:py-24 bg-white">
+            <div className="mx-auto max-w-3xl px-6">
+              <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 mb-8 text-center">
+                How Remedy Clear Helps
+              </h2>
 
               <div className="space-y-6 text-base md:text-lg leading-relaxed text-slate-700 max-w-2xl mx-auto">
                 <p>
-                  Standard medical care saves lives. Holistic approaches help many people address underlying patterns. Both have value. Both have limits.
+                  Most health searches create more confusion than clarity. One article says your symptom is serious. Another says it's nothing. Some recommend natural remedies. Others insist you need medication. You're left wondering what's true and what to do.
                 </p>
 
                 <p>
-                  Remedy Clear doesn't push one direction over the other. We give you context for both so you can have better conversations with the practitioners you trust—whether that's your family doctor, a functional medicine provider, or someone who blends the two.
+                  Remedy Clear shows you what standard medicine looks at and what holistic practitioners consider—side by side, without bias. You'll see common medical explanations, typical treatments, root-cause perspectives, and natural approaches people try. This isn't medical advice. It's a way to organize the information you're already trying to make sense of.
+                </p>
+
+                <p>
+                  When you understand both viewpoints, you can think more clearly about what feels right for you.
                 </p>
               </div>
-            </div>
 
-            <p className="mt-12 text-xs text-slate-500 text-center max-w-xl mx-auto leading-relaxed">
-              Remedy Clear is educational and does not replace professional medical advice. Always consult a qualified healthcare provider about your specific situation.
-            </p>
-          </div>
-        </section>
+              <div className="mt-16 pt-12 border-t border-slate-200">
+                <h3 className="text-xl md:text-2xl font-semibold text-slate-900 mb-6 text-center">
+                  Balance Between Medical and Holistic Perspectives
+                </h3>
+
+                <div className="space-y-6 text-base md:text-lg leading-relaxed text-slate-700 max-w-2xl mx-auto">
+                  <p>
+                    Standard medical care saves lives. Holistic approaches help many people address underlying patterns. Both have value. Both have limits.
+                  </p>
+
+                  <p>
+                    Remedy Clear doesn't push one direction over the other. We give you context for both so you can have better conversations with the practitioners you trust—whether that's your family doctor, a functional medicine provider, or someone who blends the two.
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-12 text-xs text-slate-500 text-center max-w-xl mx-auto leading-relaxed">
+                Remedy Clear is educational and does not replace professional medical advice. Always consult a qualified healthcare provider about your specific situation.
+              </p>
+            </div>
+          </section>
+        )}
 
         {/* Loading State */}
         {isLoading && (
