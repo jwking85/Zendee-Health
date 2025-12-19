@@ -3,6 +3,7 @@ import type { RecommendationResponse } from "../types";
 import { MedicalCard } from "./MedicalCard";
 import { HolisticCard } from "./HolisticCard";
 import { EvidenceSection } from "./EvidenceSection";
+import { ClearStartingPathSummary } from "./ClearStartingPathSummary";
 
 interface ResultsSectionProps {
   data: RecommendationResponse;
@@ -17,6 +18,12 @@ export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, isPro, res
       ref={resultsRef}
       className="mx-auto mt-12 max-w-5xl px-4 pb-16 scroll-mt-24"
     >
+      {/* Clear Starting Path Summary */}
+      <ClearStartingPathSummary
+        symptom={symptom}
+        keyDifference={data.keyDifference}
+      />
+
       <h2 className="text-center text-2xl font-semibold text-slate-900">
         Your Comparison Results
       </h2>
