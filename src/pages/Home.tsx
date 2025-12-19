@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getHealthAdvice } from '../../services/aiRouter';
 import { getUserProfile, saveUserProfile, saveFeedback, addToHistory, getHistory } from '../../services/storageService';
 import { EMERGENCY_KEYWORDS, SAMPLE_QUERIES } from '../../constants';
-import { HealthResponse, UserProfile } from '../../types';
+import { RecommendationResponse, UserProfile } from '../../types';
 import { trackEvent } from '../lib/analytics';
 
 // Components
@@ -20,7 +20,7 @@ import { Users } from 'lucide-react';
 const Home: React.FC = () => {
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<HealthResponse | null>(null);
+  const [data, setData] = useState<RecommendationResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPro, setIsPro] = useState(false);
 
@@ -164,7 +164,7 @@ const Home: React.FC = () => {
         <ShareCard
           onClose={() => setShowShare(false)}
           symptom={query || "Health Query"}
-          rootCause={data.holistic.protocols?.[0]?.approach || "Natural wellness approach"}
+          rootCause={data.holisticRootCause || "Natural wellness approach"}
         />
       )}
       {showProfilePrompt && (
@@ -178,13 +178,12 @@ const Home: React.FC = () => {
           <div className="mx-auto max-w-6xl px-4 py-4 md:py-6">
             <div className="mx-auto max-w-3xl">
               {/* Headline */}
-              <div className="mb-5 text-center md:mb-6">
-                <h1 className="text-[32px] font-extrabold leading-[1.15] tracking-tight text-brand-dark md:text-[52px] md:leading-[1.1]">
-                  Real answers.<br />
-                  <span className="text-brand-teal font-serif italic">Real relief.</span>
+              <div className="mb-8 text-center md:mb-12">
+                <h1 className="text-[32px] font-bold leading-[1.2] tracking-tight text-slate-900 md:text-[48px] md:leading-[1.15]">
+                  When health information feels overwhelming, start here
                 </h1>
-                <p className="mt-4 text-[16px] leading-relaxed text-slate-600 md:text-[18px]">
-                  Compare standard medical care with natural, root-cause approaches — clearly and side by side.
+                <p className="mt-6 text-[16px] leading-relaxed text-slate-600 md:text-[18px] max-w-2xl mx-auto">
+                  You've been searching for answers about your symptoms. You've found conflicting advice from doctors, holistic practitioners, and a dozen different websites. Remedy Clear helps you see both perspectives clearly, so you can make sense of what you're reading and decide on a reasonable next step.
                 </p>
               </div>
 
@@ -209,7 +208,7 @@ const Home: React.FC = () => {
                         disabled={isLoading || !query.trim()}
                         className="flex h-[48px] w-full items-center justify-center rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-6 text-base font-bold text-white shadow-lg shadow-emerald-500/30 transition hover:from-emerald-600 hover:to-teal-600 hover:shadow-xl hover:shadow-emerald-500/40 focus:outline-none focus:ring-4 focus:ring-emerald-400/50 disabled:opacity-50 disabled:cursor-not-allowed md:h-[52px] md:text-lg"
                       >
-                        {isLoading ? 'Analyzing...' : 'Find Relief'}
+                        {isLoading ? 'Analyzing...' : 'Get a clear starting path'}
                       </button>
                     </div>
                   </form>
@@ -309,37 +308,44 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        <section className="py-10 bg-white">
-          <div className="mx-auto max-w-3xl px-4">
-            <h2 className="text-xl font-semibold text-slate-800 mb-4 text-center">
-              How Remedy Clear Works
+        <section className="py-16 md:py-24 bg-white">
+          <div className="mx-auto max-w-3xl px-6">
+            <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 mb-8 text-center">
+              How Remedy Clear Helps
             </h2>
-            <p className="text-slate-600 text-sm leading-relaxed text-center mb-6">
-              Most health information gives you either a medical explanation or a natural approach — but rarely both. Remedy Clear brings those two worlds together.
-            </p>
 
-            <div className="grid gap-6 md:grid-cols-3 text-sm">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 text-teal-700 font-bold mb-3">1</div>
-                <h3 className="font-semibold text-slate-800 mb-2">You enter a symptom</h3>
-                <p className="text-slate-600 leading-relaxed">Our system analyzes it using medical research and holistic, whole-body principles.</p>
-              </div>
+            <div className="space-y-6 text-base md:text-lg leading-relaxed text-slate-700 max-w-2xl mx-auto">
+              <p>
+                Most health searches create more confusion than clarity. One article says your symptom is serious. Another says it's nothing. Some recommend natural remedies. Others insist you need medication. You're left wondering what's true and what to do.
+              </p>
 
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 text-teal-700 font-bold mb-3">2</div>
-                <h3 className="font-semibold text-slate-800 mb-2">We show you two clear paths</h3>
-                <p className="text-slate-600 leading-relaxed">One reflects conventional medical care. The other highlights natural, root-cause options.</p>
-              </div>
+              <p>
+                Remedy Clear shows you what standard medicine looks at and what holistic practitioners consider—side by side, without bias. You'll see common medical explanations, typical treatments, root-cause perspectives, and natural approaches people try. This isn't medical advice. It's a way to organize the information you're already trying to make sense of.
+              </p>
 
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-teal-100 text-teal-700 font-bold mb-3">3</div>
-                <h3 className="font-semibold text-slate-800 mb-2">You choose what fits you</h3>
-                <p className="text-slate-600 leading-relaxed">We help you understand the "why" behind each approach so you can make informed decisions.</p>
+              <p>
+                When you understand both viewpoints, you can think more clearly about what feels right for you.
+              </p>
+            </div>
+
+            <div className="mt-16 pt-12 border-t border-slate-200">
+              <h3 className="text-xl md:text-2xl font-semibold text-slate-900 mb-6 text-center">
+                Balance Between Medical and Holistic Perspectives
+              </h3>
+
+              <div className="space-y-6 text-base md:text-lg leading-relaxed text-slate-700 max-w-2xl mx-auto">
+                <p>
+                  Standard medical care saves lives. Holistic approaches help many people address underlying patterns. Both have value. Both have limits.
+                </p>
+
+                <p>
+                  Remedy Clear doesn't push one direction over the other. We give you context for both so you can have better conversations with the practitioners you trust—whether that's your family doctor, a functional medicine provider, or someone who blends the two.
+                </p>
               </div>
             </div>
 
-            <p className="mt-8 text-xs text-slate-500 italic text-center">
-              Remedy Clear is an educational tool and does not replace professional medical advice. Always talk with a qualified healthcare provider about any symptoms or changes to your health.
+            <p className="mt-12 text-xs text-slate-500 text-center max-w-xl mx-auto leading-relaxed">
+              Remedy Clear is educational and does not replace professional medical advice. Always consult a qualified healthcare provider about your specific situation.
             </p>
           </div>
         </section>
