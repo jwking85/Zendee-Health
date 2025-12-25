@@ -60,8 +60,8 @@ export const MedicalCard: React.FC<MedicalCardProps> = ({ data }) => {
             Standard Treatments
           </h3>
           <ul className="space-y-2">
-            {standardTreatments.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed text-slate-700">
+            {standardTreatments.map((item) => (
+              <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-slate-700">
                 <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-slate-400" />
                 <span>{item}</span>
               </li>

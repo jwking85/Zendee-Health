@@ -16,9 +16,9 @@ export const QuickSearchChips: React.FC<QuickSearchChipsProps> = ({ suggestions,
       {hasHistory && (
         <div className="flex flex-wrap justify-center gap-2 animate-fade-in mb-2">
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider py-1.5">Recent:</span>
-          {history.map((q, idx) => (
+          {history.map((q) => (
             <button
-              key={`hist-${idx}`}
+              key={q}
               onClick={() => onSelect(q)}
               className="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-gray-600 hover:bg-teal-50 hover:border-teal-200 hover:text-teal-700 transition-colors shadow-sm"
             >

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { getHealthAdvice } from '../../services/aiRouter';
 import { getUserProfile, saveUserProfile, saveFeedback, addToHistory, getHistory } from '../../services/storageService';
 import { EMERGENCY_KEYWORDS, SAMPLE_QUERIES } from '../../constants';
@@ -42,7 +42,10 @@ const Home: React.FC = () => {
     setUserProfile(getUserProfile());
   }, []);
 
-  const checkEmergency = (text: string): boolean => {
+  // Memoize sample queries to avoid unnecessary recalculation
+  const sampleQueries = useMemo(() => SAMPLE_QUERIES.slice(0, 6), []);
+
+  const checkEmergency = useCallback((text: string): boolean => {
     const lowerText = text.toLowerCase();
     const found = EMERGENCY_KEYWORDS.find(k => lowerText.includes(k));
     if (found) {
@@ -51,7 +54,7 @@ const Home: React.FC = () => {
       return true;
     }
     return false;
-  };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -102,7 +105,9 @@ const Home: React.FC = () => {
         new Promise(resolve => setTimeout(resolve, 4000))
       ]);
 
-      console.log("AI Raw Response:", result);
+      if (import.meta.env.DEV) {
+        console.log("AI Raw Response:", result);
+      }
       setData(result);
 
       // Track successful result
@@ -145,17 +150,17 @@ const Home: React.FC = () => {
     startAnalysis(query); // Continue search
   };
 
-  const handleSearch = (e?: React.FormEvent) => {
+  const handleSearch = useCallback((e?: React.FormEvent) => {
     if (e) e.preventDefault();
     performSearch(query);
-  };
+  }, [query, userProfile]);
 
-  const handleQuickSelect = (q: string) => {
+  const handleQuickSelect = useCallback((q: string) => {
     setQuery(q);
     performSearch(q, true); // Mark as autocomplete/quick select
-  };
+  }, [userProfile]);
 
-  const handleFeedback = (response: string) => {
+  const handleFeedback = useCallback((response: string) => {
     saveFeedback(query, response);
 
     // Track feedback event
@@ -163,7 +168,7 @@ const Home: React.FC = () => {
       symptom: query,
       feedback: response,
     });
-  };
+  }, [query]);
 
   return (
     <>
@@ -236,10 +241,10 @@ const Home: React.FC = () => {
                     <div className="flex flex-wrap gap-2">
                       {history.length > 0 ? (
                         <>
-                          {history.map((q, idx) => (
+                          {history.map((q) => (
                             <button
                               type="button"
-                              key={`hist-${idx}`}
+                              key={q}
                               onClick={() => handleQuickSelect(q)}
                               className="inline-flex items-center rounded-full bg-emerald-50 px-3.5 py-2 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200 transition hover:bg-emerald-100 hover:ring-emerald-300 md:text-sm"
                             >
@@ -249,7 +254,7 @@ const Home: React.FC = () => {
                         </>
                       ) : (
                         <>
-                          {SAMPLE_QUERIES.slice(0, 6).map((q) => (
+                          {sampleQueries.map((q) => (
                             <button
                               type="button"
                               key={q}

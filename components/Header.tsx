@@ -44,6 +44,7 @@ export const Header: React.FC<HeaderProps> = () => {
           className="absolute right-4 top-1/2 -translate-y-1/2 rounded-md border border-slate-200 p-1.5 text-slate-700 shadow-sm sm:hidden"
           onClick={() => setIsMobileOpen((prev) => !prev)}
           aria-label="Toggle navigation"
+          aria-expanded={isMobileOpen ? "true" : "false"}
         >
           <svg
             className="h-6 w-6"

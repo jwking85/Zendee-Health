@@ -5,18 +5,18 @@
 
 declare global {
   interface Window {
-    dataLayer?: any[];
-    gtag?: (...args: any[]) => void;
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
 let isInitialized = false;
-const DEBUG = true; // Set to false in production
+const DEBUG = import.meta.env.DEV; // Automatically true in dev, false in production
 
 /**
  * Log helper for analytics debugging
  */
-const log = (message: string, data?: any) => {
+const log = (message: string, data?: unknown) => {
   if (DEBUG) {
     if (data !== undefined) {
       console.log(`%c[GA4] ${message}`, 'color: #4285f4; font-weight: bold;', data);
@@ -148,7 +148,7 @@ export const initAnalytics = (): void => {
  * trackEvent("symptom_search", { symptom: "joint pain", has_profile: true });
  * trackEvent("button_click", { button_name: "share_results" });
  */
-export const trackEvent = (eventName: string, eventParams?: Record<string, any>): void => {
+export const trackEvent = (eventName: string, eventParams?: Record<string, unknown>): void => {
   if (!window.gtag) {
     console.warn(
       '%c[GA4] ⚠️ gtag not initialized. Event not tracked:',
@@ -196,7 +196,7 @@ export const trackPageView = (pagePath: string, pageTitle?: string): void => {
  * @example
  * setUserProperties({ user_type: "pro", subscription_status: "active" });
  */
-export const setUserProperties = (properties: Record<string, any>): void => {
+export const setUserProperties = (properties: Record<string, unknown>): void => {
   if (!window.gtag) {
     console.warn('[GA4] ⚠️ gtag not initialized. User properties not set');
     return;
@@ -221,7 +221,7 @@ export const isAnalyticsReady = (): boolean => {
  * @param eventName - Event name (e.g., "rc_search_submitted")
  * @param params - Optional event parameters
  */
-export const track = (eventName: string, params?: Record<string, any>): void => {
+export const track = (eventName: string, params?: Record<string, unknown>): void => {
   // Safe no-op if gtag not available
   if (typeof window === 'undefined' || !window.gtag) {
     return;

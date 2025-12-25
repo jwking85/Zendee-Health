@@ -13,21 +13,28 @@ export const WaitlistModal: React.FC<WaitlistModalProps> = ({ onClose }) => {
     e.preventDefault();
     if (!email) return;
     setStatus('submitting');
-    
+
     // Simulate API call
     setTimeout(() => {
       setStatus('success');
       // Store in local storage for persistence across reloads (mocking backend)
-      const existing = JSON.parse(localStorage.getItem('waitlist_emails') || '[]');
-      localStorage.setItem('waitlist_emails', JSON.stringify([...existing, email]));
+      try {
+        const existing = JSON.parse(localStorage.getItem('waitlist_emails') || '[]');
+        localStorage.setItem('waitlist_emails', JSON.stringify([...existing, email]));
+      } catch (error) {
+        console.error('Failed to save to localStorage:', error);
+        // Still mark as success since this is just local caching
+      }
     }, 1000);
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/40 backdrop-blur-sm animate-fade-in">
       <div className="bg-white rounded-2xl shadow-2xl max-w-sm w-full overflow-hidden relative border border-gray-100">
-        <button 
+        <button
+          type="button"
           onClick={onClose}
+          aria-label="Close modal"
           className="absolute top-3 right-3 p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-400 hover:text-gray-600"
         >
           <X className="w-5 h-5" />

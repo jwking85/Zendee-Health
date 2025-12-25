@@ -23,9 +23,10 @@ export const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, onSub
         disabled={isLoading}
       />
       <div className="absolute inset-y-2 right-2 flex items-center">
-        <button 
+        <button
           type="submit"
           disabled={isLoading || !value.trim()}
+          aria-label={isLoading ? "Searching for health information" : "Search for health information"}
           className="h-full aspect-square flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white rounded-xl transition-all disabled:opacity-50 disabled:hover:bg-teal-600 shadow-md hover:shadow-lg active:scale-95"
         >
           {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <ArrowRight className="w-5 h-5" />}

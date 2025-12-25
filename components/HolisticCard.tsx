@@ -95,8 +95,8 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro: _isPro 
               Natural Approaches
             </h3>
             <ul className="space-y-2">
-              {holisticProtocols.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed text-emerald-900">
+              {holisticProtocols.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-emerald-900">
                   <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
                   <span>{item}</span>
                 </li>

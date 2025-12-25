@@ -168,11 +168,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Try Gemini first, fallback to OpenAI
     let result;
+    let usedProvider = 'gemini';
     try {
       result = await callGemini(symptom, profile);
     } catch (geminiError) {
       console.warn('Gemini failed, trying OpenAI:', geminiError);
-      result = await callOpenAI(symptom, profile);
+      usedProvider = 'openai';
+      try {
+        result = await callOpenAI(symptom, profile);
+      } catch (openaiError) {
+        console.error('Both AI providers failed:', { geminiError, openaiError });
+        throw new Error('Unable to generate health advice at this time. Please try again later.');
+      }
     }
 
     // Ensure safe defaults
@@ -194,19 +201,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ? result.holisticProtocols
         : [],
       products: Array.isArray(result?.products)
-        ? result.products.map((p: any) => ({
-            ...p,
-            recommendedFor: p.recommendedFor || 'both',
-          }))
+        ? result.products.map((p: unknown) => {
+            const product = p as Record<string, unknown>;
+            return {
+              ...product,
+              recommendedFor: product.recommendedFor || 'both',
+            };
+          })
         : [],
     };
 
     return res.status(200).json(safeResult);
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     console.error('API error:', error);
     return res.status(500).json({
       error: 'Failed to generate health advice',
-      message: error.message,
+      message: errorMessage,
     });
   }
 }
