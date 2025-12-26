@@ -24,8 +24,9 @@ export const getHealthAdvice = async (
 
     const data = await response.json();
     return data as RecommendationResponse;
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Failed to get health advice. Please try again.';
     console.error('Health advice API error:', error);
-    throw new Error(error.message || 'Failed to get health advice. Please try again.');
+    throw new Error(errorMessage);
   }
 };

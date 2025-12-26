@@ -4,7 +4,7 @@ import {
   ShoppingCart,
   Info,
 } from "lucide-react";
-import type { RecommendationResponse } from "../types";
+import type { RecommendationResponse, Product } from "../types";
 import { resolveAffiliateUrl } from "../src/lib/affiliate";
 import { track } from "../src/lib/analytics";
 
@@ -21,7 +21,7 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro: _isPro 
     products = [],
   } = data || {};
 
-  const handleAffiliateClick = (product: any, href: string) => {
+  const handleAffiliateClick = (product: Product, href: string) => {
     track('rc_affiliate_click', {
       query: data.symptom || '',
       product_name: product.name,
@@ -42,7 +42,7 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro: _isPro 
       "
     >
       {/* subtle top accent */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500" />
 
       <header className="flex items-start justify-between gap-3 px-6 pt-6 pb-4">
         <div className="flex gap-3">

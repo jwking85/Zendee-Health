@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { AmazonLink } from './AmazonLink';
+import { track } from '../lib/analytics';
 
 export interface GuideSection {
   title: string;
@@ -46,7 +47,13 @@ export const GuidePageTemplate: React.FC<GuidePageTemplateProps> = ({ data }) =>
       meta.content = data.metaDescription;
       document.head.appendChild(meta);
     }
-  }, [data.title, data.metaDescription]);
+
+    // Track guide page view
+    track('rc_guide_viewed', {
+      guide_slug: data.slug,
+      guide_title: data.title,
+    });
+  }, [data.title, data.metaDescription, data.slug]);
 
   return (
     <main className="flex-grow w-full bg-gradient-to-b from-slate-50 via-white to-slate-50/30">

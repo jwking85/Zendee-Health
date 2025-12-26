@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import RemedyClearLogo from "../assets/remedy-clear-logo-light.png";
+import { track } from "../src/lib/analytics";
 
 interface HeaderProps {
   isPro: boolean;
@@ -8,6 +9,10 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  const handleNavClick = (destination: string) => {
+    track('rc_nav_click', { destination });
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md shadow-sm">
@@ -26,12 +31,14 @@ export const Header: React.FC<HeaderProps> = () => {
         <nav className="hidden gap-10 text-sm font-medium text-slate-800 sm:flex">
           <a
             href="/#remedyclear-tool"
+            onClick={() => handleNavClick('compare-remedies')}
             className="border-b-2 border-transparent pb-1 transition hover:border-teal-500 hover:text-teal-700"
           >
             Compare Remedies
           </a>
           <a
             href="/guides"
+            onClick={() => handleNavClick('guides')}
             className="border-b-2 border-transparent pb-1 transition hover:border-teal-500 hover:text-teal-700"
           >
             Guides

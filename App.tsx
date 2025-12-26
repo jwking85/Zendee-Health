@@ -1,33 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Pages
-import Home from './src/pages/Home';
-import PrivacyPolicy from './src/pages/PrivacyPolicy';
-import TermsOfUse from './src/pages/TermsOfUse';
-import About from './src/pages/About';
-import Contact from './src/pages/Contact';
-import JointPainPage from './src/pages/JointPainPage';
-
-// Health Guides
-import GuidesIndex from './src/pages/guides/index';
-import JointPainGuide from './src/pages/guides/JointPainGuide';
-import AcidRefluxGuide from './src/pages/guides/AcidRefluxGuide';
-import AnxietyGuide from './src/pages/guides/AnxietyGuide';
-import InsomniaGuide from './src/pages/guides/InsomniaGuide';
-import ConstipationGuide from './src/pages/guides/ConstipationGuide';
-import BloatingGuide from './src/pages/guides/BloatingGuide';
-import HeadachesGuide from './src/pages/guides/HeadachesGuide';
-import HighBloodPressureGuide from './src/pages/guides/HighBloodPressureGuide';
-import FattyLiverGuide from './src/pages/guides/FattyLiverGuide';
-import HormoneImbalanceGuide from './src/pages/guides/HormoneImbalanceGuide';
-
-// Symptom Pages
-import SymptomPage from './src/pages/symptoms/SymptomPage';
-
-// Components
+// Components (eagerly loaded)
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+
+// Home page (eagerly loaded for fast initial render)
+import Home from './src/pages/Home';
+
+// Lazy-loaded pages
+const PrivacyPolicy = lazy(() => import('./src/pages/PrivacyPolicy'));
+const TermsOfUse = lazy(() => import('./src/pages/TermsOfUse'));
+const About = lazy(() => import('./src/pages/About'));
+const Contact = lazy(() => import('./src/pages/Contact'));
+const JointPainPage = lazy(() => import('./src/pages/JointPainPage'));
+
+// Lazy-loaded Health Guides
+const GuidesIndex = lazy(() => import('./src/pages/guides/index'));
+const JointPainGuide = lazy(() => import('./src/pages/guides/JointPainGuide'));
+const AcidRefluxGuide = lazy(() => import('./src/pages/guides/AcidRefluxGuide'));
+const AnxietyGuide = lazy(() => import('./src/pages/guides/AnxietyGuide'));
+const InsomniaGuide = lazy(() => import('./src/pages/guides/InsomniaGuide'));
+const ConstipationGuide = lazy(() => import('./src/pages/guides/ConstipationGuide'));
+const BloatingGuide = lazy(() => import('./src/pages/guides/BloatingGuide'));
+const HeadachesGuide = lazy(() => import('./src/pages/guides/HeadachesGuide'));
+const HighBloodPressureGuide = lazy(() => import('./src/pages/guides/HighBloodPressureGuide'));
+const FattyLiverGuide = lazy(() => import('./src/pages/guides/FattyLiverGuide'));
+const HormoneImbalanceGuide = lazy(() => import('./src/pages/guides/HormoneImbalanceGuide'));
+
+// Lazy-loaded Symptom Pages
+const SymptomPage = lazy(() => import('./src/pages/symptoms/SymptomPage'));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-[50vh]">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600"></div>
+  </div>
+);
 
 const App: React.FC = () => {
   const [isPro, setIsPro] = useState(false);
@@ -37,7 +46,8 @@ const App: React.FC = () => {
       <div className="min-h-screen flex flex-col font-sans text-gray-900 bg-gradient-to-b from-[#F9FBFB] via-white to-[#FAFAF9] selection:bg-teal-100 selection:text-teal-900 overflow-x-hidden">
         <Header isPro={isPro} onToggle={() => setIsPro(!isPro)} />
 
-        <Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
           <Route path="/" element={<Home />} />
 
           {/* Health Guides */}
@@ -64,7 +74,8 @@ const App: React.FC = () => {
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-        </Routes>
+          </Routes>
+        </Suspense>
 
         <Footer />
       </div>

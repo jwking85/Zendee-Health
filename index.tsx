@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { initAnalytics } from './src/lib/analytics';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 // ===================================================
 // INITIALIZE GOOGLE ANALYTICS 4 BEFORE REACT RENDERS
@@ -25,7 +26,9 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </React.StrictMode>
 );
 

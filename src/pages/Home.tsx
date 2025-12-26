@@ -15,6 +15,7 @@ import { ShareCard } from '../../components/ShareCard';
 import { ProfilePrompt } from '../../components/ProfilePrompt';
 import { FeedbackPrompt } from '../../components/FeedbackPrompt';
 import { SearchAutocomplete } from '../components/SearchAutocomplete';
+import { CardSkeleton } from '../../components/CardSkeleton';
 import { Users } from 'lucide-react';
 
 const Home: React.FC = () => {
@@ -375,9 +376,17 @@ const Home: React.FC = () => {
 
         {/* Loading State */}
         {isLoading && (
-          <div className="max-w-2xl mx-auto">
-            <LoadingSequence />
-          </div>
+          <>
+            <div className="max-w-2xl mx-auto mb-8">
+              <LoadingSequence />
+            </div>
+            <div className="max-w-6xl mx-auto px-4 py-8">
+              <div className="grid gap-6 md:grid-cols-2">
+                <CardSkeleton variant="medical" />
+                <CardSkeleton variant="holistic" />
+              </div>
+            </div>
+          </>
         )}
 
         {/* Error Message */}

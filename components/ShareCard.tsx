@@ -89,8 +89,8 @@ export const ShareCard: React.FC<ShareCardProps> = ({ onClose, symptom, rootCaus
         <div className="relative p-8 bg-gradient-to-br from-teal-50 to-amber-50">
           <div className="bg-white rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] p-8 border border-white/50 relative overflow-hidden aspect-[4/5] flex flex-col">
             {/* Decorative Blobs */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-teal-200/30 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 -left-10 w-40 h-40 bg-amber-200/30 rounded-full blur-3xl" />
+            <div aria-hidden="true" className="absolute -top-10 -right-10 w-32 h-32 bg-teal-200/30 rounded-full blur-3xl" />
+            <div aria-hidden="true" className="absolute bottom-0 -left-10 w-40 h-40 bg-amber-200/30 rounded-full blur-3xl" />
 
             <div className="relative z-10 flex-grow flex flex-col">
               {/* Brand */}
