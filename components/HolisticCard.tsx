@@ -44,26 +44,39 @@ export const HolisticCard: React.FC<HolisticCardProps> = ({ data, isPro: _isPro 
       {/* subtle top accent */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500" />
 
-      <header className="flex items-start justify-between gap-3 px-6 pt-6 pb-4">
-        <div className="flex gap-3">
-          <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-100">
-            <Leaf className="h-5 w-5 text-emerald-700" />
-          </div>
-          <div>
+      {/* Left colored accent bar */}
+      <div aria-hidden="true" className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-400 via-emerald-500 to-emerald-600" />
+
+      <header className="flex items-start gap-3 px-6 pt-6 pb-4">
+        <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-100">
+          <Leaf className="h-5 w-5 text-emerald-700" />
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <span className="text-xl" aria-label="Holistic">🌿</span>
             <h2 className="text-lg font-semibold text-emerald-900 border-l-4 border-emerald-400 pl-3">
               Natural Wellness View
             </h2>
-            <p className="mt-1 text-xs text-emerald-900/80 max-w-md leading-relaxed">
-              Lifestyle-focused ideas around sleep, nutrition, blood sugar,
-              stress, and gut health so you can support your body from the root.
-            </p>
           </div>
+          <p className="text-xs text-emerald-900/80 max-w-md leading-relaxed mt-1">
+            Root-cause approaches focused on lifestyle, nutrition, and natural support
+          </p>
         </div>
       </header>
 
       <div className="border-t border-emerald-100" />
 
       <div className="px-6 pb-6 pt-4 space-y-6">
+        {/* TL;DR Box */}
+        {holisticRootCause && (
+          <div className="bg-emerald-100/50 border-l-4 border-emerald-500 rounded-r-lg p-4 mb-6">
+            <p className="text-xs font-bold text-emerald-900 uppercase tracking-wider mb-1">TL;DR - Root cause focus</p>
+            <p className="text-sm font-semibold text-emerald-900 leading-relaxed">
+              {holisticRootCause}
+            </p>
+          </div>
+        )}
+
         {/* Root Cause */}
         {holisticRootCause && (
           <section>

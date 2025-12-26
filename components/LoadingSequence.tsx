@@ -12,10 +12,10 @@ export const LoadingSequence: React.FC = () => {
   }, []);
 
   const steps = [
-    { icon: Search, text: "🔍 Checking symptoms...", color: "text-gray-500", barColor: "bg-gray-300" },
-    { icon: Database, text: "🧬 Looking for root causes...", color: "text-blue-500", barColor: "bg-blue-500" },
-    { icon: Scale, text: "⚖️ Comparing paths...", color: "text-amber-500", barColor: "bg-amber-500" },
-    { icon: Sparkles, text: "✨ Finishing up...", color: "text-teal-600", barColor: "bg-teal-600" }
+    { icon: Search, text: "Scanning 50,000+ research papers...", detail: "Finding the most relevant medical studies", color: "text-gray-500", barColor: "bg-gray-300" },
+    { icon: Database, text: "Cross-referencing medical databases...", detail: "Comparing standard and holistic approaches", color: "text-blue-500", barColor: "bg-blue-500" },
+    { icon: Scale, text: "Analyzing treatment options...", detail: "Weighing benefits and considerations", color: "text-amber-500", barColor: "bg-amber-500" },
+    { icon: Sparkles, text: "Building your personalized comparison...", detail: "Almost ready!", color: "text-teal-600", barColor: "bg-teal-600" }
   ];
 
   const CurrentIcon = steps[step]?.icon || Search;
@@ -29,11 +29,14 @@ export const LoadingSequence: React.FC = () => {
         </div>
       </div>
       
-      <div className="space-y-4 text-center max-w-xs mx-auto">
+      <div className="space-y-4 text-center max-w-md mx-auto">
         <h3 className="text-xl font-bold text-gray-900 min-h-[28px] animate-fade-in tracking-tight">
           {steps[step]?.text}
         </h3>
-        
+        <p className="text-sm text-gray-500 min-h-[20px] animate-fade-in">
+          {steps[step]?.detail}
+        </p>
+
         {/* Progress Bars */}
         <div className="flex gap-2 justify-center h-2">
           {[0, 1, 2, 3].map((i) => (
